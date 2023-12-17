@@ -18,8 +18,9 @@ class Absensi extends Migration
         Schema::create('absensi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->timestamp('check_in');
-            $table->timestamp('check_out');
+            $table->string('image')->nullable();
+            $table->timestamp('check_in')->nullable();
+            $table->timestamp('check_out')->nullable();
             $table->text('checkin_location');
             $table->text('checkout_location');
             $table->string('status');

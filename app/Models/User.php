@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\RoleModels;
+use App\Models\JabatanModels;
 
 
 class User extends Authenticatable
@@ -58,16 +59,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles()
+    public function jabatans()
     {
-        return $this->belongsToMany(RoleModels::class, 'role.id');
+        return $this->belongsTo(JabatanModels::class, 'jabatan_id');
     }
-
 
     public function hasRoleName($role)
     {
         return RoleModels::where('role', $role)->first();
     }
-
-
 }

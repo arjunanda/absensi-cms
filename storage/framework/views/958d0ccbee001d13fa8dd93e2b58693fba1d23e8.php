@@ -1,26 +1,26 @@
-@extends('layouts.simple.master')
 
-@section('title', 'Default')
 
-@section('css')
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/animate.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/chartist.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.css')}}">
-@endsection
+<?php $__env->startSection('title', 'Default'); ?>
 
-@section('style')
-@endsection
+<?php $__env->startSection('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/animate.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/chartist.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/date-picker.css')); ?>">
+<?php $__env->stopSection(); ?>
 
-@section('breadcrumb-title')
+<?php $__env->startSection('style'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('breadcrumb-title'); ?>
 <h3>Default</h3>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('breadcrumb-items')
+<?php $__env->startSection('breadcrumb-items'); ?>
 <li class="breadcrumb-item">Dashboard</li>
 <li class="breadcrumb-item active">Default</li>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid">
          <div class="row second-chart-list third-news-update">
                   <div class="col-xl-4 col-lg-12 xl-50 morning-sec box-col-12">
@@ -33,7 +33,7 @@
                                                       </div>
                                              </div>
                                              <div class="greeting-user text-center">
-                                                      <div class="profile-vector"><img class="img-fluid" src="{{asset('assets/images/dashboard/welcome.png')}}" alt=""></div>
+                                                      <div class="profile-vector"><img class="img-fluid" src="<?php echo e(asset('assets/images/dashboard/welcome.png')); ?>" alt=""></div>
                                                       <h4 class="f-w-600"><span id="greeting">Good Morning</span> <span class="right-circle"><i class="fa fa-check-circle f-14 middle"></i></span></h4>
                                                       <p><span> Today's earrning is $405 & your sales increase rate is 3.7 over the last 24 hours</span></p>
                                                       <div class="whatsnew-btn"><a class="btn btn-primary">Whats New !</a></div>
@@ -286,7 +286,7 @@
                                                                                  <tbody>
                                                                                           <tr>
                                                                                                    <td>
-                                                                                                            <img class="img-fluid img-40 rounded-circle mb-3" src="{{asset('assets/images/appointment/app-ent.jpg')}}" alt="Image description">
+                                                                                                            <img class="img-fluid img-40 rounded-circle mb-3" src="<?php echo e(asset('assets/images/appointment/app-ent.jpg')); ?>" alt="Image description">
                                                                                                             <div class="status-circle bg-primary"></div>
                                                                                                    </td>
                                                                                                    <td class="img-content-box"><span class="d-block">Venter Loren</span><span class="font-roboto">Now</span></td>
@@ -299,7 +299,7 @@
                                                                                           </tr>
                                                                                           <tr>
                                                                                                    <td>
-                                                                                                            <img class="img-fluid img-40 rounded-circle" src="{{asset('assets/images/appointment/app-ent.jpg')}}" alt="Image description">
+                                                                                                            <img class="img-fluid img-40 rounded-circle" src="<?php echo e(asset('assets/images/appointment/app-ent.jpg')); ?>" alt="Image description">
                                                                                                             <div class="status-circle bg-primary"></div>
                                                                                                    </td>
                                                                                                    <td class="img-content-box"><span class="d-block">John Loren</span><span class="font-roboto">11:00</span></td>
@@ -366,8 +366,8 @@
                                              <div class="media">
                                                       <div class="media-body">
                                                                <div class="d-flex mb-3">
-                                                                        <div class="inner-img"><img class="img-fluid" src="{{asset('assets/images/notification/1.jpg')}}" alt="Product-1"></div>
-                                                                        <div class="inner-img"><img class="img-fluid" src="{{asset('assets/images/notification/2.jpg')}}" alt="Product-2"></div>
+                                                                        <div class="inner-img"><img class="img-fluid" src="<?php echo e(asset('assets/images/notification/1.jpg')); ?>" alt="Product-1"></div>
+                                                                        <div class="inner-img"><img class="img-fluid" src="<?php echo e(asset('assets/images/notification/2.jpg')); ?>" alt="Product-2"></div>
                                                                </div>
                                                                <span class="mt-3">Quisque a consequat ante sit amet magna...</span>
                                                       </div>
@@ -410,7 +410,7 @@
                                              <div class="chat">
                                                       <div class="media left-side-chat">
                                                                <div class="media-body d-flex">
-                                                                        <div class="img-profile"> <img class="img-fluid" src="{{asset('assets/images/user.jpg')}}" alt="Profile"></div>
+                                                                        <div class="img-profile"> <img class="img-fluid" src="<?php echo e(asset('assets/images/user.jpg')); ?>" alt="Profile"></div>
                                                                         <div class="main-chat">
                                                                                  <div class="message-main"><span class="mb-0">Hi deo, Please send me link.</span></div>
                                                                                  <div class="sub-message message-main"><span class="mb-0">Right Now</span></div>
@@ -429,7 +429,7 @@
                                                       </div>
                                                       <div class="media left-side-chat">
                                                                <div class="media-body d-flex">
-                                                                        <div class="img-profile"> <img class="img-fluid" src="{{asset('assets/images/user.jpg')}}" alt="Profile"></div>
+                                                                        <div class="img-profile"> <img class="img-fluid" src="<?php echo e(asset('assets/images/user.jpg')); ?>" alt="Profile"></div>
                                                                         <div class="main-chat">
                                                                                  <div class="sub-message message-main mt-0"><span>It's argenty</span></div>
                                                                         </div>
@@ -465,28 +465,30 @@
          </div>
 </div>
 <script type="text/javascript">
-         var session_layout = '{{ session()->get('
-         layout ') }}';
+         var session_layout = '<?php echo e(session()->get('
+         layout ')); ?>';
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('script')
-<script src="{{asset('assets/js/chart/chartist/chartist.js')}}"></script>
-<script src="{{asset('assets/js/chart/chartist/chartist-plugin-tooltip.js')}}"></script>
-<script src="{{asset('assets/js/chart/knob/knob.min.js')}}"></script>
-<script src="{{asset('assets/js/chart/knob/knob-chart.js')}}"></script>
-<script src="{{asset('assets/js/chart/apex-chart/apex-chart.js')}}"></script>
-<script src="{{asset('assets/js/chart/apex-chart/stock-prices.js')}}"></script>
-<script src="{{asset('assets/js/notify/bootstrap-notify.min.js')}}"></script>
-<script src="{{asset('assets/js/dashboard/default.js')}}"></script>
-<script src="{{asset('assets/js/notify/index.js')}}"></script>
-<script src="{{asset('assets/js/datepicker/date-picker/datepicker.js')}}"></script>
-<script src="{{asset('assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
-<script src="{{asset('assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
-<script src="{{asset('assets/js/typeahead/handlebars.js')}}"></script>
-<script src="{{asset('assets/js/typeahead/typeahead.bundle.js')}}"></script>
-<script src="{{asset('assets/js/typeahead/typeahead.custom.js')}}"></script>
-<script src="{{asset('assets/js/typeahead-search/handlebars.js')}}"></script>
-<script src="{{asset('assets/js/typeahead-search/typeahead-custom.js')}}"></script>
-@endsection
+<?php $__env->startSection('script'); ?>
+<script src="<?php echo e(asset('assets/js/chart/chartist/chartist.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/chart/chartist/chartist-plugin-tooltip.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/chart/knob/knob.min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/chart/knob/knob-chart.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/chart/apex-chart/apex-chart.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/chart/apex-chart/stock-prices.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/notify/bootstrap-notify.min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/dashboard/default.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/notify/index.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.en.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.custom.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/typeahead/handlebars.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/typeahead/typeahead.bundle.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/typeahead/typeahead.custom.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/typeahead-search/handlebars.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/typeahead-search/typeahead-custom.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.simple.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\fajar\Documents\absensi-cms\resources\views/dashboard/index.blade.php ENDPATH**/ ?>

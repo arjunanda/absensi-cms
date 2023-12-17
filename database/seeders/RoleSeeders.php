@@ -19,6 +19,16 @@ class RoleSeeders extends Seeder
                 'id'             => 1,
                 'role' => 'admin',
                 'created_at'     =>  date('Y-m-d H:i:s'),
+            ],
+            [
+                'id'             => 2,
+                'role' => 'karyawan',
+                'created_at'     =>  date('Y-m-d H:i:s'),
+            ],
+            [
+                'id'             => 3,
+                'role' => 'owner',
+                'created_at'     =>  date('Y-m-d H:i:s'),
             ]
         ];
 

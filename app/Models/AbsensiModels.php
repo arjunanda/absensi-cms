@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
-class JabatanModels extends Model
+class AbsensiModels extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -19,11 +19,12 @@ class JabatanModels extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'jabatan',
+        'user_id',
+        'image',
+        'check_in',
+        'check_out',
+        'checkin_location',
+        'checkout_location',
+        'status'
     ];
-
-    public function users()
-    {
-        return $this->hasMany(User::class, 'jabatan_id')->where('role_id', 2);
-    }
 }

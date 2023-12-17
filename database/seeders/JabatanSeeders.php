@@ -19,6 +19,11 @@ class JabatanSeeders extends Seeder
                 'id'             => 1,
                 'jabatan' => 'ceo',
                 'created_at'     =>  date('Y-m-d H:i:s'),
+            ],
+            [
+                'id'             => 2,
+                'jabatan' => 'pegawai',
+                'created_at'     =>  date('Y-m-d H:i:s'),
             ]
         ];
 

@@ -6,14 +6,18 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\KaryawanController;
 
-Route::get('/', function () {
-    return redirect()->route('index');
-})->name('/');
+// Route::get('/', function () {
+//     return redirect()->route('dashboard');
+// })->name('/');
+
+Route::view('/', 'karyawan.absen.index')->name('/');
 
 //Language Change
 Route::get('lang/{locale}', function ($locale) {
-    if (! in_array($locale, ['en', 'de', 'es','fr','pt', 'cn', 'ae'])) {
+    if (!in_array($locale, ['en', 'de', 'es', 'fr', 'pt', 'cn', 'ae'])) {
         abort(400);
     }
     Session()->put('locale', $locale);
@@ -83,7 +87,7 @@ Route::prefix('authentication')->group(function () {
     Route::view('maintenance', 'authentication.maintenance')->name('maintenance');
 });
 
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     Artisan::call('config:cache');
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
@@ -99,6 +103,24 @@ Route::prefix('auth')->group(function () {
     Route::post('/', [AuthController::class, 'login']);
 });
 
+
 Route::group(['middleware' => ['checkRole:admin'], 'prefix' => 'dashboard'], function () {
     Route::get('/', [DashboardController::class, 'show'])->name('dashboard');
+
+    // Karyawan
+
+    Route::view('/karyawan', 'admin.karyawan.index')->name('karyawan');
+    Route::get('/get-karyawan', [KaryawanController::class, 'index']);
+    Route::get('/karyawan/add', [KaryawanController::class, 'create'])->name('add-karyawan');
+    Route::post('/karyawan/add', [KaryawanController::class, 'store'])->name('store-karyawan');
+    Route::get('/karyawan/edit/{id}', [KaryawanController::class, 'edit'])->name('edit-karyawan');
+    Route::post('/karyawan/edit/{id}', [KaryawanController::class, 'update'])->name('update-karyawan');
+
+    // Jabatan
+    Route::view('/jabatan', 'admin.jabatan.index')->name('jabatan');
+    Route::get('/get-jabatan', [JabatanController::class, 'index']);
+    Route::get('/jabatan/add', [JabatanController::class, 'create'])->name('add-jabatan');
+    Route::post('/jabatan/add', [JabatanController::class, 'store'])->name('store-jabatan');
+    Route::get('/jabatan/edit/{id}', [JabatanController::class, 'edit'])->name('edit-jabatan');
+    Route::post('/jabatan/edit/{id}', [JabatanController::class, 'update'])->name('update-jabatan');
 });
