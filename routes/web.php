@@ -8,6 +8,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\PermohonanController;
+use App\Http\Controllers\PresensiController;
+use App\Http\Controllers\SettingController;
 
 // Route::get('/', function () {
 //     return redirect()->route('dashboard');
@@ -123,4 +126,21 @@ Route::group(['middleware' => ['checkRole:admin'], 'prefix' => 'dashboard'], fun
     Route::post('/jabatan/add', [JabatanController::class, 'store'])->name('store-jabatan');
     Route::get('/jabatan/edit/{id}', [JabatanController::class, 'edit'])->name('edit-jabatan');
     Route::post('/jabatan/edit/{id}', [JabatanController::class, 'update'])->name('update-jabatan');
+
+    // Presensi
+    Route::view('/presensi', 'admin.jabatan.index')->name('presensi');
+    Route::get('/get-presensi', [PresensiController::class, 'index']);
+    Route::get('/presensi/add', [PresensiController::class, 'create'])->name('add-presensi');
+    Route::post('/presensi/add', [PresensiController::class, 'store'])->name('store-presensi');
+    Route::get('/presensi/edit/{id}', [PresensiController::class, 'edit'])->name('edit-presensi');
+    Route::post('/presensi/edit/{id}', [PresensiController::class, 'update'])->name('update-presensi');
+
+    // Setting
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+    Route::post('/update-setting', [SettingController::class, 'update'])->name('update-setting');
+
+    // Permohonan
+    Route::view('/permohonan', 'admin.permohonan.index')->name('permohonan');
+    Route::get('/get-permohonan', [PermohonanController::class, 'index'])->name('get-permohonan');
+    Route::get('/permohonan/detail/{id}', [PermohonanController::class, 'detail'])->name('detail-permohonan');
 });
