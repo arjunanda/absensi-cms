@@ -17,11 +17,13 @@ class PermohonanCuti extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->enum('type', ['cuti', 'sakit'])->default('cuti');
-            $table->timestamp('awal_cuti')->nullable();
-            $table->timestamp('akhir_cuti')->nullable();
+            $table->date('awal_cuti')->nullable();
+            $table->date('akhir_cuti')->nullable();
+            $table->integer('jumlah_cuti')->nullable();
             $table->text('description');
-            $table->boolean('status');
+            $table->enum('status', ['approve', 'inapprove', 'pending'])->default('pending');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });

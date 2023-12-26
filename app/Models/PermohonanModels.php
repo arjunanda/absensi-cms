@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AbsensiModels extends Model
+class PermohonanModels extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public $table = 'jabatan';
+    public $table = 'permohonan_cuti';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -20,11 +20,10 @@ class AbsensiModels extends Model
 
     protected $fillable = [
         'user_id',
-        'image',
-        'check_in',
-        'check_out',
-        'checkin_location',
-        'checkout_location',
+        'type',
+        'awal_cuti',
+        'akhir_cuti',
+        'description',
         'status'
     ];
 
@@ -32,5 +31,4 @@ class AbsensiModels extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
 }

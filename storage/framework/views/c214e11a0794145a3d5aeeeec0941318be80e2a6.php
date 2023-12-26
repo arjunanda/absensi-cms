@@ -1,24 +1,23 @@
-@extends('layouts.simple.master')
-@section('title', 'Bootstrap Basic Tables')
+<?php $__env->startSection('title', 'Bootstrap Basic Tables'); ?>
 
-@section('css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/datatables.css') }}">
+<?php $__env->startSection('css'); ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/datatables.css')); ?>">
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('style')
-@endsection
+<?php $__env->startSection('style'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('breadcrumb-title')
+<?php $__env->startSection('breadcrumb-title'); ?>
     <h3>Jabatan Lists</h3>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('breadcrumb-items')
+<?php $__env->startSection('breadcrumb-items'); ?>
     <li class="breadcrumb-item">Dashboard</li>
     <li class="breadcrumb-item active">Jabatan</li>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container-fluid">
         <div class="row">
 
@@ -30,7 +29,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-0 me-0"></div>
-                            <a class="btn btn-primary" href="{{ route('add-jabatan') }}"> <i data-feather="plus-square">
+                            <a class="btn btn-primary" href="<?php echo e(route('add-jabatan')); ?>"> <i data-feather="plus-square">
                                 </i>Tambah Jabatan</a>
                         </div>
                     </div>
@@ -41,11 +40,11 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-md-12 mb-3">
-                            @if (session('success'))
+                            <?php if(session('success')): ?>
                                 <div class="alert alert-success dark alert-dismissible fade show" role="alert">
                                     <center>
 
-                                        <strong class="text-center">{{ session('success') }}</strong>
+                                        <strong class="text-center"><?php echo e(session('success')); ?></strong>
 
 
 
@@ -53,7 +52,7 @@
                                     <button class="btn-close" type="button" data-bs-dismiss="alert"
                                         aria-label="Close"></button>
                                 </div>
-                            @endif
+                            <?php endif; ?>
 
 
                         </div>
@@ -68,24 +67,7 @@
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody>
-                                                                        @foreach ($users as $key => $user)
-
-
-                                                                        <tr>
-                                                                                 <th scope="row">{{ $key+1 }}</th>
-                                                               <td>{{ $user->name }}</td>
-                                                               <td>{{ $user->nip }}</td>
-                                                               <td>{{ $user->jabatans->jabatan }}</td>
-                                                               <td>
-                                                                        <button type="button" class="btn btn-danger">Delete</button>
-                                                                        <button type="button" class="btn btn-success">Edit</button>
-
-                                                               </td>
-                                                               </tr>
-                                                               @endforeach
-
-                                                               </tbody> --}}
+                                
                             </table>
                         </div>
                     </div>
@@ -93,11 +75,11 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@section('script')
-    <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(asset('assets/js/datatable/datatables/jquery.dataTables.min.js')); ?>"></script>
 
     <script>
         $(document).ready(function() {
@@ -105,7 +87,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ url('/dashboard/get-jabatan') }}'
+                    url: '<?php echo e(url('/dashboard/get-jabatan')); ?>'
 
                         ,
                     type: 'GET',
@@ -143,4 +125,6 @@
         });
     </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.simple.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/redtech/development/website/Laravel/cuba_starter_kit/resources/views/admin/jabatan/index.blade.php ENDPATH**/ ?>
