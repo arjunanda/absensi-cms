@@ -465,8 +465,7 @@
          </div>
 </div>
 <script type="text/javascript">
-         var session_layout = '<?php echo e(session()->get('
-         layout ')); ?>';
+         var session_layout = '<?php echo e(session()->get('layout')); ?>';
 
 </script>
 <?php $__env->stopSection(); ?>
@@ -490,5 +489,6 @@
 <script src="<?php echo e(asset('assets/js/typeahead-search/handlebars.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/typeahead-search/typeahead-custom.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
+
 
 <?php echo $__env->make('layouts.simple.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\fajar\Documents\absensi-cms\resources\views/dashboard/index.blade.php ENDPATH**/ ?>

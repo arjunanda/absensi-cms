@@ -465,8 +465,7 @@
          </div>
 </div>
 <script type="text/javascript">
-         var session_layout = '{{ session()->get('
-         layout ') }}';
+         var session_layout = '{{ session()->get('layout') }}';
 
 </script>
 @endsection
@@ -490,3 +489,4 @@
 <script src="{{asset('assets/js/typeahead-search/handlebars.js')}}"></script>
 <script src="{{asset('assets/js/typeahead-search/typeahead-custom.js')}}"></script>
 @endsection
+
