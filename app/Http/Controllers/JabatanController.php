@@ -18,7 +18,8 @@ class JabatanController extends Controller
         $perPage = $request->input('length', 10);
         $page = $request->input('start', 0) / $perPage + 1;
 
-        $jabatans = JabatanModels::withCount('users')->paginate($perPage, ['*'], 'page', $page);
+
+        $jabatans = JabatanModels::withCount('users')->paginate($perPage, ['*'], 'jabatan', $page);
 
         $data = $jabatans->map(function ($item, $key) {
             return [
@@ -29,7 +30,7 @@ class JabatanController extends Controller
             ];
         });
 
-        return response()->json(['data' => $data, 'recordsFiltered' => $jabatans->total(), 'recordsTotal' => $jabatans->total()]);
+        return response()->json(['data' => $data, 'draw' => $perPage, 'recordsFiltered' => $jabatans->total(), 'recordsTotal' => $jabatans->total()]);
     }
 
     /**

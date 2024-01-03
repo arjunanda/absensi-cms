@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class CheckRole
 {
@@ -18,9 +20,16 @@ class CheckRole
     public function handle(Request $request, Closure $next, $role)
     {
 
-        if (Auth::check() && Auth::user()->hasRoleName($role)) {
+
+        if (Auth::check() && Auth::user()->hasRoleName($role)->first()) {
 
             return $next($request);
+
+        }
+
+        if ($role == 'karyawan') {
+
+            return redirect()->route('login-karyawan');
         }
 
         return redirect()->route('auth');

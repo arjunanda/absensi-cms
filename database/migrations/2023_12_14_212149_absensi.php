@@ -19,12 +19,13 @@ class Absensi extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->date('tanggal_checkin');
-            $table->string('image')->nullable();
+            $table->string('image_checkin')->nullable();
+            $table->string('image_checkout')->nullable();
             $table->timestamp('check_in')->nullable();
             $table->timestamp('check_out')->nullable();
-            $table->text('checkin_location');
-            $table->text('checkout_location');
-            $table->string('status');
+            $table->text('checkin_location')->nullable();
+            $table->text('checkout_location')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
             $table->softDeletes();
 

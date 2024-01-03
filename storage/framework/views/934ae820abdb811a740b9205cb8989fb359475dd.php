@@ -1,11 +1,10 @@
-@extends('karyawan.layouts.index')
-@section('title', 'Login')
+<?php $__env->startSection('title', 'Login'); ?>
 
 
-@section('karyawan_content')
+<?php $__env->startSection('karyawan_content'); ?>
     <div class="container-fluid">
 
-        {{-- <div><a class="logo" href="{{ route('index') }}"><img class="img-fluid for-light" src="{{asset('assets/images/logo/login.png')}}" alt="looginpage"><img class="img-fluid for-dark" src="{{asset('assets/images/logo/logo_dark.png')}}" alt="looginpage"></a></div> --}}
+        
         <div class="flex flex-column px-5 justify-content-center align-items-center"
             style="height: 100vh; display: flex; align-items: center;">
 
@@ -16,14 +15,21 @@
                         <img src="/assets/img/spln-icon.jpg" width="200" height="150" style="object-fit: cover;" />
                     </div>
                 </div>
-                <form class="theme-form" novalidate="" action="{{ route('post_karyawan') }}" method="POST">
-                    @csrf
+                <form class="theme-form" novalidate="" action="<?php echo e(route('post_karyawan')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
                     <div class="form-group">
                         <label class="col-form-label text-black-50">NIP</label>
                         <input class="form-control" type="number" name="nip" required="" placeholder="11223344">
-                        @error('login')
-                            <b class="text-dark">{{ $message }}</b>
-                        @enderror
+                        <?php $__errorArgs = ['login'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <b class="text-dark"><?php echo e($message); ?></b>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     </div>
                     <div class="form-group mb-3">
                         <label class="col-form-label text-black-50">Password</label>
@@ -42,15 +48,17 @@
                     <div class="form-group mb-0">
                         <button class="btn btn-warning btn-block form-control" type="submit">Sign in</button>
                     </div>
-                    {{-- <h6 class="text-muted mt-4 or">Or Sign in with</h6> --}}
+                    
                     <div class="social mt-4">
-                        {{-- <div class="btn-showcase"><a class="btn btn-light" href="https://www.linkedin.com/login" target="_blank"><i class="txt-linkedin" data-feather="linkedin"></i> LinkedIn </a><a class="btn btn-light" href="https://twitter.com/login?lang=en" target="_blank"><i class="txt-twitter" data-feather="twitter"></i>twitter</a><a class="btn btn-light" href="https://www.facebook.com/" target="_blank"><i class="txt-fb" data-feather="facebook"></i>facebook</a></div> --}}
+                        
                     </div>
                 </form>
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('script')
-@endsection
+<?php $__env->startSection('script'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('karyawan.layouts.index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/redtech/development/website/Laravel/cuba_starter_kit/resources/views/karyawan/login/index.blade.php ENDPATH**/ ?>

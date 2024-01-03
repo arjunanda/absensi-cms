@@ -9,7 +9,7 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h3>Settings</h3>
+    <h3>Atur Jam Kerja</h3>
 @endsection
 
 @section('breadcrumb-items')

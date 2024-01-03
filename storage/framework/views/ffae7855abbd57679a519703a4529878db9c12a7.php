@@ -8,7 +8,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-title'); ?>
-    <h3>Settings</h3>
+    <h3>Atur Jam Kerja</h3>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-items'); ?>

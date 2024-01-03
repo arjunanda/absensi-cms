@@ -66,6 +66,6 @@ class User extends Authenticatable
 
     public function hasRoleName($role)
     {
-        return RoleModels::where('role', $role)->first();
+        return $this->belongsTo(RoleModels::class, 'role_id')->where('role', $role);
     }
 }

@@ -17,7 +17,7 @@
     @yield('style')
   </head>
   <body @if(Route::current()->getName() == 'index') onload="startTime()" @endif>
-    @if(Route::current()->getName() == 'index') 
+    @if(Route::current()->getName() == 'index')
       <div class="loader-wrapper">
         <div class="loader-index"><span></span></div>
         <svg>
@@ -43,7 +43,7 @@
         @include('layouts.simple.sidebar')
         <!-- Page Sidebar Ends-->
         <div class="page-body">
-          <div class="container-fluid">        
+          <div class="container-fluid">
             <div class="page-title">
               <div class="row">
                 <div class="col-6">
@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-6">
                   <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('/') }}"> <i data-feather="home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"> <i data-feather="home"></i></a></li>
                     @yield('breadcrumb-items')
                   </ol>
                 </div>
@@ -63,12 +63,12 @@
           <!-- Container-fluid Ends-->
         </div>
         <!-- footer start-->
-        @include('layouts.simple.footer') 
-        
+        @include('layouts.simple.footer')
+
       </div>
     </div>
     <!-- latest jquery-->
-    @include('layouts.simple.script')  
+    @include('layouts.simple.script')
     <!-- Plugin used-->
 
     <script type="text/javascript">

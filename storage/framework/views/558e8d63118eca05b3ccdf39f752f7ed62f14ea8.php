@@ -9,18 +9,22 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="<?php echo e(asset('assets/images/favicon.png')); ?>" type="image/x-icon">
     <link rel="shortcut icon" href="<?php echo e(asset('assets/images/favicon.png')); ?>" type="image/x-icon">
+
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>"> <!-- Tambahkan ini -->
+
      <title>Cuba - Premium Admin Template - <?php echo $__env->yieldContent('title'); ?></title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
-    
+
     <?php echo $__env->make('layouts.authentication.css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <?php echo $__env->yieldContent('style'); ?> 
+    <?php echo $__env->yieldContent('style'); ?>
   </head>
   <body>
     <!-- login page start-->
-    <?php echo $__env->yieldContent('content'); ?>  
+    <?php echo $__env->yieldContent('content'); ?>
     <!-- latest jquery-->
-    <?php echo $__env->make('layouts.authentication.script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> 
+    <?php echo $__env->make('layouts.authentication.script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   </body>
-</html><?php /**PATH /home/redtech/development/website/Laravel/cuba_starter_kit/resources/views/layouts/authentication/master.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH /home/redtech/development/website/Laravel/cuba_starter_kit/resources/views/layouts/authentication/master.blade.php ENDPATH**/ ?>

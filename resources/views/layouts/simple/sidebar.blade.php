@@ -1,17 +1,17 @@
 <div class="sidebar-wrapper">
          <div>
                   <div class="logo-wrapper">
-                           <a href="{{route('/')}}"><img class="img-fluid for-light" src="{{asset('assets/images/logo/logo.png')}}" alt=""><img class="img-fluid for-dark" src="{{asset('assets/images/logo/logo_dark.png')}}" alt=""></a>
+                           <a href="{{route('dashboard')}}"><img class="img-fluid for-light" src="{{asset('assets/images/logo/logo.png')}}" alt=""><img class="img-fluid for-dark" src="{{asset('assets/images/logo/logo_dark.png')}}" alt=""></a>
                            <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
                   </div>
-                  <div class="logo-icon-wrapper"><a href="{{route('/')}}"><img class="img-fluid" src="{{asset('assets/images/logo/logo-icon.png')}}" alt=""></a></div>
+                  <div class="logo-icon-wrapper"><a href="{{route('dashboard')}}"><img class="img-fluid" src="{{asset('assets/images/logo/logo-icon.png')}}" alt=""></a></div>
                   <nav class="sidebar-main">
                            <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
                            <div id="sidebar-menu">
                                     <ul class="sidebar-links" id="simple-bar">
                                              <li class="back-btn">
-                                                      <a href="{{route('/')}}"><img class="img-fluid" src="{{asset('assets/images/logo/logo-icon.png')}}" alt=""></a>
+                                                      <a href="{{route('dashboard')}}"><img class="img-fluid" src="{{asset('assets/images/logo/logo-icon.png')}}" alt=""></a>
                                                       <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                                              </li>
                                              <li class="sidebar-main-title">
@@ -55,7 +55,7 @@
                                              <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='karyawan' || Route::currentRouteName()=='add-karyawan' || Route::currentRouteName()=='edit-karyawan') ? 'active' : '' }}" href="{{route('karyawan')}}"><i data-feather="users"> </i><span>Karyawan</span></a></li>
                                              <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='jabatan' || Route::currentRouteName()=='add-jabatan' || Route::currentRouteName()=='edit-jabatan') ? 'active' : '' }}" href="{{route('jabatan')}}"><i data-feather="briefcase"> </i><span>Jabatan</span></a></li>
                                              <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='permohonan' || Route::currentRouteName()=='detail-permohonan') ? 'active' : '' }}" href="{{route('permohonan')}}"><i data-feather="briefcase"> </i><span>Permohonan Ijin</span></a></li>
-                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='settings') ? 'active' : '' }}" href="{{route('settings')}}"><i data-feather="settings"> </i><span>Setting</span></a></li>
+                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='settings') ? 'active' : '' }}" href="{{route('settings')}}"><i data-feather="settings"> </i><span>Atur Jam Kerja</span></a></li>
 
 
 

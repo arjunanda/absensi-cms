@@ -35,7 +35,7 @@ class UserSeeders extends Seeder
                 'role_id' => 2,
                 'jabatan_id' => 2,
                 'name'           => 'Fajar Fakhrian',
-                'nip'          => '099088099',
+                'nip'          => '11223355',
                 'email'          => 'fajar@fakhriyan.com',
                 'email_verified_at' => date('Y-m-d H:i:s'),
                 'image'          => 'https://via.placeholder.com/500',

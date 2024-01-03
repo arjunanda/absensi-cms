@@ -87,9 +87,11 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '<?php echo e(url('/dashboard/get-jabatan')); ?>'
+                    url: '<?php echo e(url('/dashboard/get-jabatan')); ?>',
+                    data: function(d) {
+                        d.draw = d.start / d.length + 1;
 
-                        ,
+                    },
                     type: 'GET',
                 },
                 columns: [{

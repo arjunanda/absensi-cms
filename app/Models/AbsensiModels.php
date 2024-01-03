@@ -10,7 +10,7 @@ class AbsensiModels extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public $table = 'jabatan';
+    public $table = 'absensi';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -20,7 +20,9 @@ class AbsensiModels extends Model
 
     protected $fillable = [
         'user_id',
-        'image',
+        'tanggal_checkin',
+        'image_checkin',
+        'image_checkout',
         'check_in',
         'check_out',
         'checkin_location',

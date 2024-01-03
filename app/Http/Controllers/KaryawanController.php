@@ -20,6 +20,8 @@ class KaryawanController extends Controller
         $perPage = $request->input('length', 10);
         $page = $request->input('start', 0) / $perPage + 1;
 
+        // user
+
         $users = User::with('jabatans')->where('role_id', 2)->paginate($perPage, ['*'], 'page', $page);
 
         $data = $users->map(function ($user, $key) {

@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PermohonanController;
@@ -16,7 +17,16 @@ use App\Http\Controllers\SettingController;
 //     return redirect()->route('dashboard');
 // })->name('/');
 
-Route::view('/', 'karyawan.absen.index')->name('/');
+Route::group(['middleware' => ['checkRole:karyawan']], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::post('/absen', [HomeController::class, 'absen'])->name('absen');
+    Route::get('/rekam_kehadiran', [HomeController::class, 'viewAbsen'])->name('rekam_kehadiran');
+    Route::get('/history', [HomeController::class, 'history'])->name('history');
+
+});
+
+Route::get('/login-karyawan', [HomeController::class, 'login'])->name('login-karyawan');
+Route::post('/login-karyawan', [AuthController::class, 'login_karyawan'])->name('post_karyawan');
 
 //Language Change
 Route::get('lang/{locale}', function ($locale) {
