@@ -21,7 +21,7 @@
 <div class="container-fluid">
    <div>
       <div class="row product-page-main p-0">
-         <div class="col-xl-5 xl-100 box-col-6">
+         <div class="col-md-12 md-100 box-col-12">
             <div class="card">
                <div class="card-body">
                   <div class="product-page-details">
@@ -53,14 +53,29 @@
                               <td class="px-3"> <b>:</b></td>
                               <td><?php echo e($data->jumlah_cuti); ?></td>
                            </tr>
+                           <tr>
+                            <td> <b>Status</b></td>
+                            <td class="px-3"> <b>:</b></td>
+                            <td><?php echo e($data->status == 'inapprove' ? 'Canceled' : ($data->status == "pending" ? 'Pending' : 'Approved')); ?></td>
+                         </tr>
                         </tbody>
                      </table>
                   </div>
                   <hr>
                   <div class="m-t-15">
-                      <a href=<?php echo e(route('permohonan')); ?>><button class="btn btn-dark m-r-10" type="button" title="">Back</button></a>
-                      <button class="btn btn-danger m-r-10" type="button" title="">Cancel</button>
-                     <button class="btn btn-success m-r-10" type="button" title="">Approve</button>
+
+                      <form method="POST" action="<?php echo e(route('change_permohonan_status', ['id' => $data->id])); ?>">
+
+                        <?php echo csrf_field(); ?>
+                        <a href=<?php echo e(route('permohonan')); ?>><button class="btn btn-dark m-r-10" type="button" title="">Back</button></a>
+
+                        <?php if($data->status == 'pending'): ?>
+
+                            <button class="btn btn-danger m-r-10" type="submit" name="status" title="" value="inapprove">Cancel</button>
+                            <button class="btn btn-success m-r-10" type="submit" name="status" title="" value="approve">Approve</button>
+                        <?php endif; ?>
+
+                      </form>
                   </div>
                </div>
             </div>
@@ -76,6 +91,25 @@
 <script src="<?php echo e(asset('assets/js/rating/rating-script.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/owlcarousel/owl.carousel.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/ecommerce.js')); ?>"></script>
+
+<script>
+    // $(document).ready(function() {
+        function ChangeStatus(status) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo e(route('change_permohonan_status', ['id' => $data->id])); ?>",
+                datatype: 'json',
+                data: {
+                    'status': status,
+                    '_token': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    console.log(response)
+                }
+            })
+        }
+    // })
+</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.simple.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/redtech/development/website/Laravel/cuba_starter_kit/resources/views/admin/permohonan/detail.blade.php ENDPATH**/ ?>

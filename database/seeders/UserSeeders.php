@@ -44,6 +44,21 @@ class UserSeeders extends Seeder
                 'created_at'     =>  date('Y-m-d H:i:s'),
                 'updated_at'     => null,
                 'deleted_at'     => null,
+            ],
+            [
+                'id'             => 3,
+                'role_id' => 3,
+                'jabatan_id' => 1,
+                'name'           => 'Arjun',
+                'nip'          => '00000000',
+                'email'          => 'owner@owner.com',
+                'email_verified_at' => date('Y-m-d H:i:s'),
+                'image'          => 'https://via.placeholder.com/500',
+                'status' => true,
+                'password'       => bcrypt('password123'),
+                'created_at'     =>  date('Y-m-d H:i:s'),
+                'updated_at'     => null,
+                'deleted_at'     => null,
             ]
         ];
 

@@ -15,7 +15,7 @@
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Dashboard</li>
-    <li class="breadcrumb-item active">Karyawan</li>
+    <li class="breadcrumb-item active">Permohonan lists</li>
 @endsection
 
 @section('content')
@@ -53,27 +53,10 @@
                                         <th scope="col">Type</th>
                                         <th scope="col">Tanggal Awal Ijin</th>
                                         <th scope="col">Tanggal Akhir Ijin</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody>
-                                                                        @foreach ($users as $key => $user)
-
-
-                                                                        <tr>
-                                                                                 <th scope="row">{{ $key+1 }}</th>
-                                                               <td>{{ $user->name }}</td>
-                                                               <td>{{ $user->nip }}</td>
-                                                               <td>{{ $user->jabatans->jabatan }}</td>
-                                                               <td>
-                                                                        <button type="button" class="btn btn-danger">Delete</button>
-                                                                        <button type="button" class="btn btn-success">Edit</button>
-
-                                                               </td>
-                                                               </tr>
-                                                               @endforeach
-
-                                                               </tbody> --}}
                             </table>
                         </div>
                     </div>
@@ -112,6 +95,24 @@
                 }, {
                     data: 'akhir_cuti',
                     name: 'akhir_cuti'
+
+                }, {
+                    data: null,
+                    render: function(data, type, row) {
+
+                        if (data.status == 'inapprove') {
+
+                            return '<span class="font-danger">Canceled</span>'
+                        }
+                        if (data.status == 'approve') {
+
+                            return '<span class="font-success">Approved</span>'
+                        }
+                        if (data.status == 'pending') {
+
+                            return '<span class="font-info">Pending</span>'
+                        }
+                    }
 
                 }, {
                     data: null,

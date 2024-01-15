@@ -24,7 +24,7 @@
 
                   <div class="d-flex justify-content-evenly align-items-center mt-4 bg-light rounded" style="height:100px">
                            <div class="text-center" style="cursor: pointer;">
-                                    <img src="<?php echo e(asset('assets/svg-icon/bookmart.svg')); ?>" alt="" style="width:40px; height:40px;">
+                                    <img src="<?php echo e(asset('assets/svg-icon/bookmart.svg')); ?>" onclick="Izin()" alt="" style="width:40px; height:40px;">
                                     <p class="text-dark">Permohonan izin</p>
                            </div>
                            <div class="text-center" style="cursor: pointer;" onclick="History()">
@@ -32,7 +32,7 @@
                                     <p class="text-dark ">History Kehadiran</p>
                            </div>
                            <div class="text-center" style="cursor: pointer;">
-                                    <img src="<?php echo e(asset('assets/svg-icon/time-svgrepo-com.svg')); ?>" alt="" style="width:40px; height:40px;">
+                                    <img src="<?php echo e(asset('assets/svg-icon/time-svgrepo-com.svg')); ?>" onclick="Lembur()" alt="" style="width:40px; height:40px;">
 
                                     <p class="text-dark">Pengajuan Lembur</p>
                            </div>
@@ -88,6 +88,42 @@
 
 
 <?php $__env->startSection('script'); ?>
+<script src="<?php echo e(asset('assets/js/notify/bootstrap-notify.min.js')); ?>"></script>
+
+
+    <?php if(session('success')): ?>
+    <script>
+        $(document).ready(function() {
+
+            $.notify({
+                title: '<strong>Berhasil!!</strong>',
+                message: "<p><?php echo e(session('success')); ?><p>"
+            }, {
+                type: 'success',
+                allow_dismiss: true,
+                newest_on_top: false,
+                mouse_over: false,
+                showProgressbar: true,
+                spacing: 10,
+                timer: 500,
+                placement: {
+                    from: 'top',
+                    align: 'center'
+                },
+                offset: {
+                    x: 30,
+                    y: 30
+                },
+                delay: 1700,
+                z_index: 10000,
+                animate: {
+                    enter: 'animated fadeInDown',
+                    exit: 'animated fadeOutUp'
+                }
+            });
+        })
+    </script>
+    <?php endif; ?>
 <script>
 
     function rekamKehadiran() {
@@ -96,6 +132,9 @@
 
     function History() {
         window.location.href = '/history'
+    }
+    function Izin() {
+        window.location.href = '/permohonan_izin'
     }
 </script>
 <?php $__env->stopSection(); ?>

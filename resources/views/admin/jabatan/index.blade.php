@@ -128,16 +128,29 @@
                     searchable: false,
                     orderable: false,
                     render: function(data, type, row) {
-                        return '<a href="/dashboard/jabatan/edit/' + row.id +
-                            '"><button class="btn btn-success">Edit</button></a> ' +
+                        return '<div  class="d-flex flex-wrap justify-content-start"><a href="/dashboard/jabatan/edit/' + row.id +
+                            '"><button class="btn btn-success " style="margin-top: 2px; margin-right: 5px;">Edit</button></a> ' +
 
-
-                            ' <button type="button" class="btn btn-danger">Delete</button>';
+                            '<form action="/dashboard/jabatan/delete/' + row.id + '" method="POST" class="delete-form" style="margin-top: 2px;">' +
+                    '@csrf' +
+                    '@method("DELETE")' +
+                    '<button type="button" class="btn btn-danger delete-btn">Delete</button>' +
+                    '</form> </div>';
 
                     },
                     width: '150px'
 
                 }, ],
+            });
+
+            $('#jabatan-table').on('click', '.delete-btn', function() {
+                var form = $(this).closest('form');
+
+                // Konfirmasi penghapusan (gunakan sweetalert atau konfirmasi sesuai kebutuhan)
+                if (confirm('Apakah kamu yakin ingin menghapus jabatan ini?')) {
+                    // Kirim formulir penghapusan
+                    form.submit();
+                }
             });
             setTimeout(() => {
                 $('.btn-close').click();

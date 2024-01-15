@@ -21,6 +21,7 @@ class PermohonanController extends Controller
             $carbonAwalDate = Carbon::parse($item->awal_cuti);
             $carbonAkhirDate = Carbon::parse($item->akhir_cuti);
 
+
             return [
                 'no' => $key + 1,
                 'id' => $item->id,
@@ -36,32 +37,34 @@ class PermohonanController extends Controller
         return response()->json(['data' => $data, 'recordsFiltered' => $permohonan->total(), 'recordsTotal' => $permohonan->total()]);
     }
 
-    public function detail($id) {
+    public function detail($id)
+    {
         $data = PermohonanModels::with('users')->find($id);
 
 
         return view('admin.permohonan.detail', compact('data'));
-
     }
 
-    public function changeStatus(Request $request, $id) {
+    public function changeStatus(Request $request, $id)
+    {
 
-        $role = Auth::user()->hashRoleName('admin');
+        $role = Auth::user()->hasRoleName('admin');
 
         if ($role) {
 
             $permohonan = PermohonanModels::find($id);
-            $permohonan::update([
-                'status' => $request->input('status')
-            ]);
 
-            return response()->json([
-                "valid" => true,
-                "message" => "Success change status",
-            ]);
+
+            if ($permohonan) {
+
+                $permohonan->update([
+                    'status' => $request->input('status')
+                ]);
+
+                return redirect()->route('permohonan')->with('success', 'Status berhasil diubah.');
+            }
+
+            return redirect()->route('jabatan')->with('error', 'Permohonan tidak ditemukan.');
         }
-
-
     }
 }
-

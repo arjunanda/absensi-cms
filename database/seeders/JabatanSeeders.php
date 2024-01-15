@@ -17,12 +17,17 @@ class JabatanSeeders extends Seeder
         $jabatan = [
             [
                 'id'             => 1,
-                'jabatan' => 'ceo',
+                'jabatan' => 'founder',
                 'created_at'     =>  date('Y-m-d H:i:s'),
             ],
             [
                 'id'             => 2,
                 'jabatan' => 'pegawai',
+                'created_at'     =>  date('Y-m-d H:i:s'),
+            ],
+            [
+                'id'             => 3,
+                'jabatan' => 'hrd',
                 'created_at'     =>  date('Y-m-d H:i:s'),
             ]
         ];

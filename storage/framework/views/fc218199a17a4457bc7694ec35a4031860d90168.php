@@ -54,6 +54,20 @@
                                 </div>
                             <?php endif; ?>
 
+                            <?php if(session('error')): ?>
+                                <div class="alert alert-danger dark alert-dismissible fade show" role="alert">
+                                    <center>
+
+                                        <strong class="text-center"><?php echo e(session('error')); ?></strong>
+
+
+
+                                    </center>
+                                    <button class="btn-close" type="button" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
+
 
                         </div>
 
@@ -111,16 +125,29 @@
                     searchable: false,
                     orderable: false,
                     render: function(data, type, row) {
-                        return '<a href="/dashboard/karyawan/edit/' + row.id +
-                            '"><button class="btn btn-success">Edit</button></a> ' +
+                        return '<div  class="d-flex flex-wrap justify-content-start"><a href="/dashboard/karyawan/edit/' + row.id +
+                            '"><button class="btn btn-success " style="margin-top: 2px; margin-right: 5px;">Edit</button></a> ' +
 
-
-                            ' <button type="button" class="btn btn-danger">Delete</button>';
+                            '<form action="/dashboard/karyawan/delete/' + row.id + '" method="POST" class="delete-form" style="margin-top: 2px;">' +
+                    '<?php echo csrf_field(); ?>' +
+                    '<?php echo method_field("DELETE"); ?>' +
+                    '<button type="button" class="btn btn-danger delete-btn">Delete</button>' +
+                    '</form> </div>';
 
                     },
                     width: '150px'
 
                 }, ],
+            });
+
+            $('#users-table').on('click', '.delete-btn', function() {
+                var form = $(this).closest('form');
+
+                // Konfirmasi penghapusan (gunakan sweetalert atau konfirmasi sesuai kebutuhan)
+                if (confirm('Apakah kamu yakin menghapus karyawan ini?')) {
+                    // Kirim formulir penghapusan
+                    form.submit();
+                }
             });
             setTimeout(() => {
                 $('.btn-close').click();

@@ -21,13 +21,20 @@
                                                       </div>
                                              </li>
                                              
-                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e(Route::currentRouteName()=='dashboard' ? 'active' : ''); ?>" href="<?php echo e(route('dashboard')); ?>"><i data-feather="home"> </i><span><?php echo e(trans('lang.Dashboards')); ?></span></a></li>
 
-                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e((Route::currentRouteName()=='karyawan' || Route::currentRouteName()=='add-karyawan' || Route::currentRouteName()=='edit-karyawan') ? 'active' : ''); ?>" href="<?php echo e(route('karyawan')); ?>"><i data-feather="users"> </i><span>Karyawan</span></a></li>
-                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e((Route::currentRouteName()=='jabatan' || Route::currentRouteName()=='add-jabatan' || Route::currentRouteName()=='edit-jabatan') ? 'active' : ''); ?>" href="<?php echo e(route('jabatan')); ?>"><i data-feather="briefcase"> </i><span>Jabatan</span></a></li>
-                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e((Route::currentRouteName()=='permohonan' || Route::currentRouteName()=='detail-permohonan') ? 'active' : ''); ?>" href="<?php echo e(route('permohonan')); ?>"><i data-feather="briefcase"> </i><span>Permohonan Ijin</span></a></li>
-                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e((Route::currentRouteName()=='settings') ? 'active' : ''); ?>" href="<?php echo e(route('settings')); ?>"><i data-feather="settings"> </i><span>Atur Jam Kerja</span></a></li>
+                                             <?php if(Auth::user()->role_id != "3"): ?>
 
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e(Route::currentRouteName()=='dashboard' ? 'active' : ''); ?>" href="<?php echo e(route('dashboard')); ?>"><i data-feather="home"> </i><span><?php echo e(trans('lang.Dashboards')); ?></span></a></li>
+
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e((Route::currentRouteName()=='karyawan' || Route::currentRouteName()=='add-karyawan' || Route::currentRouteName()=='edit-karyawan') ? 'active' : ''); ?>" href="<?php echo e(route('karyawan')); ?>"><i data-feather="users"> </i><span>Karyawan</span></a></li>
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e((Route::currentRouteName()=='jabatan' || Route::currentRouteName()=='add-jabatan' || Route::currentRouteName()=='edit-jabatan') ? 'active' : ''); ?>" href="<?php echo e(route('jabatan')); ?>"><i data-feather="briefcase"> </i><span>Jabatan</span></a></li>
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e((Route::currentRouteName()=='permohonan' || Route::currentRouteName()=='detail-permohonan') ? 'active' : ''); ?>" href="<?php echo e(route('permohonan')); ?>"><i data-feather="inbox"> </i><span>Permohonan Izin</span></a></li>
+
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e((Route::currentRouteName()=='presensi' || Route::currentRouteName()=='detail-presensi') || Route::currentRouteName()=='create-presensi' ? 'active' : ''); ?>" href="<?php echo e(route('presensi')); ?>"><i data-feather="book"> </i><span>Presensi</span></a></li>
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e((Route::currentRouteName()=='settings') ? 'active' : ''); ?>" href="<?php echo e(route('settings')); ?>"><i data-feather="settings"> </i><span>Atur Jam Kerja</span></a></li>
+                                            <?php else: ?>
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav <?php echo e((Route::currentRouteName()=='presensi' || Route::currentRouteName()=='detail-presensi') || Route::currentRouteName()=='create-presensi' ? 'active' : ''); ?>" href="<?php echo e(route('presensi')); ?>"><i data-feather="book"> </i><span>Presensi</span></a></li>
+                                                 <?php endif; ?>
 
 
                                     </ul>

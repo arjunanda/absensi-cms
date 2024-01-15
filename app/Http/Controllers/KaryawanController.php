@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JabatanModels;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Services\UploadImageService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
@@ -67,7 +68,8 @@ class KaryawanController extends Controller
             'fullName' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'jabatan' => 'required',
-            'nip' => 'required|integer', // confirmed: harus ada kolom 'password_confirmation'
+            'image' => 'image|mimes:jpeg,png,jpg,gif',
+            'nip' => 'required|integer|unique:users', // confirmed: harus ada kolom 'password_confirmation'
             'password' => 'required|string|min:8|confirmed', // confirmed: harus ada kolom 'password_confirmation'
         ]);
 
@@ -80,11 +82,28 @@ class KaryawanController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+
+        $fileName = null;
+
+        if ($request->file('image')) {
+
+            try {
+                $res = new UploadImageService;
+                $fileName = $res->upload($request->file('image'));
+
+
+            } catch (\Throwable $th) {
+                $request->session()->flash('error', 'Terjadi kesalahan ketika mengupload gambar.');
+
+                return redirect('/dashboard/karyawan');
+            }
+        }
+
         $user = User::create([
             'role_id' => 2,
             'jabatan_id' => $request->input('jabatan'),
             'name' => $request->input('fullName'),
-            'image' => '',
+            'image' => $fileName,
             'email' => $request->input('email'),
             'nip' => $request->input('nip'),
             'password' => Hash::make($request->input('password')),
@@ -154,8 +173,8 @@ class KaryawanController extends Controller
         $validator = Validator::make($request->all(), [
             'fullName' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'jabatan' => 'required',
-            'nip' => 'required|integer', // confirmed: harus ada kolom 'password_confirmation'
+            'image' => 'image|mimes:jpeg,png,jpg,gif',
+            'jabatan' => 'required', // confirmed: harus ada kolom 'password_confirmation'
         ]);
 
         // dd($validator->fails());
@@ -168,15 +187,49 @@ class KaryawanController extends Controller
                 ->withInput();
         }
 
+        $fileName = null;
+
+        if ($request->file('image')) {
+
+            try {
+                $res = new UploadImageService;
+                $fileName = $res->upload($request->file('image'));
+
+
+            } catch (\Throwable $th) {
+                $request->session()->flash('error', 'Terjadi kesalahan ketika mengupload gambar.');
+
+                return redirect('/dashboard/karyawan');
+            }
+        }
+
         $user = User::where('id', $id)->where('role_id', 2)->first();
+
+
 
         $user->update([
             'jabatan_id' => $request->input('jabatan'),
             'name' => $request->input('fullName'),
-            'image' => '',
+            'image' => @$fileName ?? $user->image,
             'email' => $request->input('email'),
-            'nip' => $request->input('nip'),
         ]);
+
+        if ($user->nip !== $request->input('nip') ) {
+            // Validasi dan update password
+            $nipValidator = Validator::make($request->all(), [
+                'nip' => 'required|integer|unique:users',
+            ]);
+
+            if ($nipValidator->fails()) {
+                return redirect('/dashboard/karyawan/edit/' . $id)
+                    ->withErrors($nipValidator)
+                    ->withInput();
+            }
+
+            $user->update([
+                'nip' => $request->input('nip'),
+            ]);
+        }
 
         if ($request->filled('password')) {
             // Validasi dan update password
@@ -211,5 +264,15 @@ class KaryawanController extends Controller
     public function destroy($id)
     {
         //
+
+        $user = User::where('role_id', 2)->where('id', $id)->first();
+
+        if (!$user) {
+            return redirect()->route('karyawan')->with('error', 'Karyawan tidak ditemukan.');
+        }
+
+        $user->delete();
+
+        return redirect()->route('karyawan')->with('success', 'Karyawan berhasil dihapus.');
     }
 }

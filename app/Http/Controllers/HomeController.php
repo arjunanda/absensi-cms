@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AbsensiModels;
+use App\Models\PermohonanModels;
 use App\Models\SettingModels;
 use App\Models\User;
 use Carbon\Carbon;
@@ -10,6 +11,8 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
+
 // use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -59,14 +62,15 @@ class HomeController extends Controller
         return view('karyawan.absen.index', $data);
     }
 
-    public function viewAbsen() {
+    public function viewAbsen()
+    {
         $user = Auth::user();
 
         $now = Carbon::now();
         $today = $now->toDateString();
 
         $absensi = AbsensiModels::where('user_id', $user->id)->where('tanggal_checkin', $today)
-        ->first();
+            ->first();
 
         $users = User::with('jabatans')->find($user->id);
 
@@ -123,8 +127,6 @@ class HomeController extends Controller
                         'message' => 'Silahkan hubungi Administrator.'
                     ]);
                 }
-
-
             } else {
 
                 try {
@@ -149,8 +151,6 @@ class HomeController extends Controller
                         'message' => $th
                     ]);
                 }
-
-
             }
         } else {
             return response()->json([
@@ -160,20 +160,87 @@ class HomeController extends Controller
         }
     }
 
-    public function history(Request $request) {
+    public function history(Request $request)
+    {
         // dd($request->input('page'));
 
         $user = Auth::user();
 
-        $absensi = AbsensiModels::where('user_id', $user->id)->whereNotNull('check_out')->paginate(10, ['*'], 'name', $request->input('page') ?? 1);
+        $absensi = AbsensiModels::where('user_id', $user->id)->whereNotNull('check_out')->paginate(50, ['*'], 'name', $request->input('page') ?? 1);
+
+
+        if (@$request->input('start_date') && @$request->input('end_date')) {
+
+            $absensi = AbsensiModels::where('user_id', $user->id)->where('tanggal_checkin', '>=', $request->input('start_date'))
+                ->where('tanggal_checkin', '<=', $request->input('end_date'))->whereNotNull('check_out')->paginate(50, ['*'], 'name', $request->input('page') ?? 1);
+        }
 
 
         $data = [
             'absensi' => $absensi,
-            'setting' => SettingModels::find(1)
+            'setting' => SettingModels::find(1),
+            // 'start_date' => @$request->input('start_date'),
+            // 'end_date' => @$request->input('end_date')
+
         ];
 
         return view('karyawan.absen.history', $data);
+    }
+
+
+    public function cuti()
+    {
+        return view('karyawan.absen.cuti');
+    }
+
+    public function storeCuti(Request $request)
+    {
+
+        if ($request->input('type_izin') == 0) {
+            $request->merge(['type_izin' => null]);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'start_date' => 'required',
+            'type_izin' => 'required',
+            'alasan' => 'required',
+        ]);
+        // dd($validator);
+
+
+        if ($validator->fails()) {
+
+            return redirect('/permohonan_izin')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+        $selisihHari = 0;
+
+        if ($request->input('end_date')) {
+
+            $tanggalAwal = Carbon::parse($request->input('start_date'));
+            $tanggalAkhir = Carbon::parse($request->input('end_date'));
+
+            $selisihHari = $tanggalAkhir->diffInDays($tanggalAwal);
+        }
+
+        $user = PermohonanModels::create([
+            'user_id' => Auth::user()->id,
+            'start_date' => $request->input('start_date'),
+            'end_date' => @$request->input('end_date'),
+            'jumlah_cuti' => $selisihHari,
+            'type' => $request->input('type_izin'),
+            'description' => $request->input('alasan'),
+        ]);
+
+
+        // Lakukan registrasi atau tindakan lainnya jika validasi berhasil
+
+        $request->session()->flash('success', 'Data Permohonan berhasil ditambahkan.');
+
+        return redirect('/');
     }
 
     public function login()

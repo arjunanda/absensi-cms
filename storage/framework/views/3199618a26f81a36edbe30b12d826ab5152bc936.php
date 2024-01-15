@@ -9,6 +9,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="<?php echo e(asset('assets/images/favicon.png')); ?>" type="image/x-icon">
     <link rel="shortcut icon" href="<?php echo e(asset('assets/images/favicon.png')); ?>" type="image/x-icon">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>"> <!-- Tambahkan ini -->
     <title>Cuba - Premium Admin Template</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">

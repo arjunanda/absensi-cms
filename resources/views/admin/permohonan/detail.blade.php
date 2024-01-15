@@ -10,7 +10,7 @@
 @endsection
 
 @section('breadcrumb-title')
-<h3>Permohonan Ijin</h3>
+<h3>Permohonan Izin</h3>
 @endsection
 
 @section('breadcrumb-items')
@@ -22,7 +22,7 @@
 <div class="container-fluid">
    <div>
       <div class="row product-page-main p-0">
-         <div class="col-xl-5 xl-100 box-col-6">
+         <div class="col-md-12 md-100 box-col-12">
             <div class="card">
                <div class="card-body">
                   <div class="product-page-details">
@@ -54,14 +54,29 @@
                               <td class="px-3"> <b>:</b></td>
                               <td>{{ $data->jumlah_cuti }}</td>
                            </tr>
+                           <tr>
+                            <td> <b>Status</b></td>
+                            <td class="px-3"> <b>:</b></td>
+                            <td>{{ $data->status == 'inapprove' ? 'Canceled' : ($data->status == "pending" ? 'Pending' : 'Approved')  }}</td>
+                         </tr>
                         </tbody>
                      </table>
                   </div>
                   <hr>
                   <div class="m-t-15">
-                      <a href={{ route('permohonan') }}><button class="btn btn-dark m-r-10" type="button" title="">Back</button></a>
-                      <button class="btn btn-danger m-r-10" type="button" title="">Cancel</button>
-                     <button class="btn btn-success m-r-10" type="button" title="">Approve</button>
+
+                      <form method="POST" action="{{ route('change_permohonan_status', ['id' => $data->id]) }}">
+
+                        @csrf
+                        <a href={{ route('permohonan') }}><button class="btn btn-dark m-r-10" type="button" title="">Back</button></a>
+
+                        @if ($data->status == 'pending')
+
+                            <button class="btn btn-danger m-r-10" type="submit" name="status" title="" value="inapprove">Cancel</button>
+                            <button class="btn btn-success m-r-10" type="submit" name="status" title="" value="approve">Approve</button>
+                        @endif
+
+                      </form>
                   </div>
                </div>
             </div>
@@ -77,4 +92,23 @@
 <script src="{{asset('assets/js/rating/rating-script.js')}}"></script>
 <script src="{{asset('assets/js/owlcarousel/owl.carousel.js')}}"></script>
 <script src="{{asset('assets/js/ecommerce.js')}}"></script>
+
+<script>
+    // $(document).ready(function() {
+        function ChangeStatus(status) {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('change_permohonan_status', ['id' => $data->id]) }}",
+                datatype: 'json',
+                data: {
+                    'status': status,
+                    '_token': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    console.log(response)
+                }
+            })
+        }
+    // })
+</script>
 @endsection

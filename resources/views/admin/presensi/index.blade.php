@@ -10,18 +10,32 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h3>Permohonan Lists</h3>
+    <h3>Presensi Lists</h3>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Dashboard</li>
-    <li class="breadcrumb-item active">Karyawan</li>
+    <li class="breadcrumb-item active">presensi</li>
 @endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
 
+            <div class="col-md-12 project-list">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-0 me-0"></div>
+                            <a class="btn btn-primary" href="{{ route('create-presensi') }}"> <i data-feather="plus-square">
+                                </i>Buat Laporan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-sm-12">
                 <div class="card">
@@ -45,14 +59,14 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table id="permohonan-table" class="display datatables">
+                            <table id="presensi-table" class="display datatables">
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Nama</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Tanggal Awal Ijin</th>
-                                        <th scope="col">Tanggal Akhir Ijin</th>
+                                        <th scope="col">Tanggal Check In</th>
+                                        <th scope="col">Check in</th>
+                                        <th scope="col">Check out</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -89,11 +103,11 @@
 
     <script>
         $(document).ready(function() {
-            $('#permohonan-table').DataTable({
+            $('#presensi-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ url('/dashboard/get-permohonan') }}',
+                    url: '{{ url('/dashboard/get-presensi') }}',
                     type: 'GET',
                 },
                 columns: [{
@@ -103,22 +117,21 @@
                     data: 'name',
                     name: 'name'
                 }, {
-                    data: 'type',
-                    name: 'type'
+                    data: 'tanggal_checkin',
+                    name: 'tanggal_checkin'
                 }, {
-                    data: 'awal_cuti',
-                    name: 'awal_cuti'
+                    data: 'check_in',
+                    name: 'check_in'
 
                 }, {
-                    data: 'akhir_cuti',
-                    name: 'akhir_cuti'
-
+                    data: 'check_out',
+                    name: 'check_out'
                 }, {
                     data: null,
                     searchable: false,
                     orderable: false,
                     render: function(data, type, row) {
-                        return '<a href="/dashboard/permohonan/detail/' + row.id +
+                        return '<a href="/dashboard/presensi/detail/' + row.id +
                             '"><button class="btn btn-success">Detail</button></a> ';
 
                     },

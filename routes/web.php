@@ -22,6 +22,9 @@ Route::group(['middleware' => ['checkRole:karyawan']], function () {
     Route::post('/absen', [HomeController::class, 'absen'])->name('absen');
     Route::get('/rekam_kehadiran', [HomeController::class, 'viewAbsen'])->name('rekam_kehadiran');
     Route::get('/history', [HomeController::class, 'history'])->name('history');
+    Route::get('/permohonan_izin', [HomeController::class, 'cuti'])->name('cuti');
+    Route::post('/store-permohonan', [HomeController::class, 'storeCuti'])->name('store_permohonan');
+    Route::post('/history', [HomeController::class, 'history'])->name('filter_history');
 
 });
 
@@ -128,6 +131,7 @@ Route::group(['middleware' => ['checkRole:admin'], 'prefix' => 'dashboard'], fun
     Route::post('/karyawan/add', [KaryawanController::class, 'store'])->name('store-karyawan');
     Route::get('/karyawan/edit/{id}', [KaryawanController::class, 'edit'])->name('edit-karyawan');
     Route::post('/karyawan/edit/{id}', [KaryawanController::class, 'update'])->name('update-karyawan');
+    Route::delete('/karyawan/delete/{id}', [KaryawanController::class, 'destroy'])->name('delete-karyawan');
 
     // Jabatan
     Route::view('/jabatan', 'admin.jabatan.index')->name('jabatan');
@@ -138,19 +142,41 @@ Route::group(['middleware' => ['checkRole:admin'], 'prefix' => 'dashboard'], fun
     Route::post('/jabatan/edit/{id}', [JabatanController::class, 'update'])->name('update-jabatan');
 
     // Presensi
-    Route::view('/presensi', 'admin.jabatan.index')->name('presensi');
-    Route::get('/get-presensi', [PresensiController::class, 'index']);
-    Route::get('/presensi/add', [PresensiController::class, 'create'])->name('add-presensi');
-    Route::post('/presensi/add', [PresensiController::class, 'store'])->name('store-presensi');
-    Route::get('/presensi/edit/{id}', [PresensiController::class, 'edit'])->name('edit-presensi');
+    Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi');
+    Route::get('/get-presensi', [PresensiController::class, 'getDataPresensi'])->name('get-presensi');
+    Route::get('/presensi/create-laporan', [PresensiController::class, 'createReport'])->name('create-presensi');
+    Route::post('/presensi/download-laporan', [PresensiController::class, 'storeReport'])->name('store-presensi');
+    Route::get('/presensi/detail/{id}', [PresensiController::class, 'detail'])->name('detail-presensi');
     Route::post('/presensi/edit/{id}', [PresensiController::class, 'update'])->name('update-presensi');
 
     // Setting
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+    Route::get('/edit-profile', [SettingController::class, 'editProfile'])->name('edit_profile');
+    Route::post('/update-profile', [SettingController::class, 'updateProfile'])->name('update_profile');
     Route::post('/update-setting', [SettingController::class, 'update'])->name('update-setting');
 
     // Permohonan
     Route::view('/permohonan', 'admin.permohonan.index')->name('permohonan');
     Route::get('/get-permohonan', [PermohonanController::class, 'index'])->name('get-permohonan');
     Route::get('/permohonan/detail/{id}', [PermohonanController::class, 'detail'])->name('detail-permohonan');
+    Route::post('/permohonan/detail/{id}/status', [PermohonanController::class, 'changeStatus'])->name('change_permohonan_status');
+});
+
+Route::group(['middleware' => ['checkRole:owner'], 'prefix' => 'dashboard'], function () {
+    Route::get('/', [DashboardController::class, 'show'])->name('dashboard');
+
+    // Presensi
+    Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi');
+    Route::get('/get-presensi', [PresensiController::class, 'getDataPresensi'])->name('get-presensi');
+    Route::get('/presensi/create-laporan', [PresensiController::class, 'createReport'])->name('create-presensi');
+    Route::post('/presensi/download-laporan', [PresensiController::class, 'storeReport'])->name('store-presensi');
+    Route::get('/presensi/detail/{id}', [PresensiController::class, 'detail'])->name('detail-presensi');
+    Route::post('/presensi/edit/{id}', [PresensiController::class, 'update'])->name('update-presensi');
+
+    // Setting
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+    Route::get('/edit-profile', [SettingController::class, 'editProfile'])->name('edit_profile');
+    Route::post('/update-profile', [SettingController::class, 'updateProfile'])->name('update_profile');
+    Route::post('/update-setting', [SettingController::class, 'update'])->name('update-setting');
+
 });

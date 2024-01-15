@@ -50,13 +50,20 @@
                                                                <p>{{ trans('lang.All neccesory pages added') }}</p>
                                                       </div>
                                              </li> --}}
-                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='dashboard' ? 'active' : '' }}" href="{{route('dashboard')}}"><i data-feather="home"> </i><span>{{ trans('lang.Dashboards') }}</span></a></li>
 
-                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='karyawan' || Route::currentRouteName()=='add-karyawan' || Route::currentRouteName()=='edit-karyawan') ? 'active' : '' }}" href="{{route('karyawan')}}"><i data-feather="users"> </i><span>Karyawan</span></a></li>
-                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='jabatan' || Route::currentRouteName()=='add-jabatan' || Route::currentRouteName()=='edit-jabatan') ? 'active' : '' }}" href="{{route('jabatan')}}"><i data-feather="briefcase"> </i><span>Jabatan</span></a></li>
-                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='permohonan' || Route::currentRouteName()=='detail-permohonan') ? 'active' : '' }}" href="{{route('permohonan')}}"><i data-feather="briefcase"> </i><span>Permohonan Ijin</span></a></li>
-                                             <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='settings') ? 'active' : '' }}" href="{{route('settings')}}"><i data-feather="settings"> </i><span>Atur Jam Kerja</span></a></li>
+                                             @if (Auth::user()->role_id != "3")
 
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='dashboard' ? 'active' : '' }}" href="{{route('dashboard')}}"><i data-feather="home"> </i><span>{{ trans('lang.Dashboards') }}</span></a></li>
+
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='karyawan' || Route::currentRouteName()=='add-karyawan' || Route::currentRouteName()=='edit-karyawan') ? 'active' : '' }}" href="{{route('karyawan')}}"><i data-feather="users"> </i><span>Karyawan</span></a></li>
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='jabatan' || Route::currentRouteName()=='add-jabatan' || Route::currentRouteName()=='edit-jabatan') ? 'active' : '' }}" href="{{route('jabatan')}}"><i data-feather="briefcase"> </i><span>Jabatan</span></a></li>
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='permohonan' || Route::currentRouteName()=='detail-permohonan') ? 'active' : '' }}" href="{{route('permohonan')}}"><i data-feather="inbox"> </i><span>Permohonan Izin</span></a></li>
+
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='presensi' || Route::currentRouteName()=='detail-presensi') || Route::currentRouteName()=='create-presensi' ? 'active' : '' }}" href="{{route('presensi')}}"><i data-feather="book"> </i><span>Presensi</span></a></li>
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='settings') ? 'active' : '' }}" href="{{route('settings')}}"><i data-feather="settings"> </i><span>Atur Jam Kerja</span></a></li>
+                                            @else
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='presensi' || Route::currentRouteName()=='detail-presensi') || Route::currentRouteName()=='create-presensi' ? 'active' : '' }}" href="{{route('presensi')}}"><i data-feather="book"> </i><span>Presensi</span></a></li>
+                                                 @endif
 
 
                                     </ul>

@@ -150,5 +150,15 @@ class JabatanController extends Controller
     public function destroy($id)
     {
         //
+
+        $user = JabatanModels::find($id);
+
+        if (!$user) {
+            return redirect()->route('jabatan')->with('error', 'Jabatan tidak ditemukan.');
+        }
+
+        $user->delete();
+
+        return redirect()->route('jabatan')->with('success', 'Jabatan berhasil dihapus.');
     }
 }
