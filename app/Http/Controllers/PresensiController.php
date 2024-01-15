@@ -167,10 +167,10 @@ class PresensiController extends Controller
             'tidak_masuk' => $tidak_masuk - $cuti - $sakit
         ];
 
-        // $pdf = Pdf::loadView('admin.presensi.download', $data);
-        // return $pdf->download('laporan.pdf');
+        $pdf = Pdf::loadView('admin.presensi.download', $data);
+        return $pdf->download('laporan.pdf');
 
-        return view('admin.presensi.download', $data);
+        // return view('admin.presensi.download', $data);
     }
 
     public function getDataPresensi(Request $request)
