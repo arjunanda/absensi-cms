@@ -14,56 +14,70 @@
             </nav>
             <div class="px-3 py-3">
 
-                    <form novalidate="" method="POST" action="{{ route('store_lembur') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <label for="validationCustom01 " class="font-dark">Tanggal Awal</label>
-                                <input class="form-control @error('start_date') is-invalid @enderror"
-                                    id="validationCustom01" type="date" name="start_date" placeholder="Tanggal Awal"
-                                    required="" value="{{ old('start_date') }}" name="start_date">
+                <form novalidate="" method="POST" action="{{ route('store_lembur') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustom01 " class="font-dark">Tanggal Awal</label>
+                            {{-- <input class="form-control @error('start_date') is-invalid @enderror" id="validationCustom01"
+                                type="date" name="start_date" placeholder="Tanggal Awal" required=""
+                                value="{{ old('start_date') }}" autocomplete="off"> --}}
 
-
-                                @error('start_date')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-
-                            </div>
-
-                            <div class="col-md-12 mb-3">
-                                <label for="validationCustom01 " class="font-dark">Tanggal Akhir</label>
-                                <input class="form-control @error('end_date') is-invalid @enderror"
-                                    id="validationCustom01" type="date" name="end_date" placeholder="Tanggal Akhir"
-                                    required="" value="{{ old('end_date') }}" name="end_date">
-
-
-                                @error('end_date')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="validationCustom01" class=" font-dark">Alasan Lembur</label>
-                                <textarea class="form-control @error('alasan') is-invalid @enderror" id="validationCustom01"
-                                type="text" placeholder="Alasan Lembur" name="alasan" required=""
-                                value="{{ old('alasan') }}" rows="5"></textarea>
-
-                                @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-
+                            <div class="input-group clockpicker pull-center" data-placement="bottom" data-align="left"
+                                data-autoclose="true">
+                                <input class="form-control @error('start_date') is-invalid @enderror" id="validationCustom01" type="text"
+                                    name="start_date" value="{{ old('start_date') }}" autocomplete="off"><span
+                                    class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                    @error('start_date')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                             </div>
 
 
 
 
                         </div>
-                        <div class="text-center">
 
-                            <button class="btn btn-secondary" type="submit">Buat Permohonan</button>
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustom01 " class="font-dark">Tanggal Akhir</label>
+
+                            <div class="input-group clockpicker pull-center" data-placement="bottom" data-align="left"
+                                data-autoclose="true">
+                                <input class="form-control @error('end_date') is-invalid @enderror" type="text"
+                                    name="end_date" value="{{ old('end_date') }}" autocomplete="off"><span
+                                    class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                    @error('end_date')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustom01" class=" font-dark">Alasan Lembur</label>
+
+                            <div class="input-group">
+
+                                <textarea class="form-control @error('alasan') is-invalid @enderror" id="validationCustom01" type="text"
+                                    placeholder="Alasan Lembur" name="alasan" required="" value="{{ old('alasan') }}" rows="5"></textarea>
+
+                                @error('alasan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                         </div>
 
-                    </form>
+
+
+
+                    </div>
+                    <div class="text-center">
+
+                        <button class="btn btn-secondary" type="submit">Buat Permohonan</button>
+                    </div>
+
+                </form>
             </div>
         </div>
 
@@ -73,6 +87,10 @@
 
 
 @section('script')
+    <script src="{{ asset('assets/js/form-validation-custom.js') }}"></script>
+    <script src="{{ asset('assets/js/time-picker/jquery-clockpicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/time-picker/highlight.min.js') }}"></script>
+    <script src="{{ asset('assets/js/time-picker/clockpicker.js') }}"></script>
     <script>
         function goBack() {
 

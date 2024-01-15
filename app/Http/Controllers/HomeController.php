@@ -281,12 +281,15 @@ class HomeController extends Controller
             $selisihHari = $tanggalAkhir->diffInDays($tanggalAwal);
         }
 
+        $tanggalHariIni = date('Y-m-d');
+
         // dd($request->input('start_date'));
+        // dd($tanggalHariIni . ' ' . @$request->input('end_date') . ':00');
 
         $user = LemburModels::create([
             'user_id' => Auth::user()->id,
-            'awal_lembur' => $request->input('start_date'),
-            'akhir_lembur' => @$request->input('end_date'),
+            'awal_lembur' => $tanggalHariIni . ' ' . $request->input('start_date') . ':00',
+            'akhir_lembur' => $tanggalHariIni . ' ' . @$request->input('end_date') . ':00',
             'jumlah_lembur' => $selisihHari,
             'description' => $request->input('alasan'),
 

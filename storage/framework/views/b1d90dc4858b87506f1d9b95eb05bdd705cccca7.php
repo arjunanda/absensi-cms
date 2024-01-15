@@ -1,7 +1,7 @@
 <?php $__env->startSection('css'); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/animate.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/timepicker.css')); ?>">
 <?php $__env->stopSection(); ?>
-
 <?php $__env->startSection('style'); ?>
 <?php $__env->stopSection(); ?>
 

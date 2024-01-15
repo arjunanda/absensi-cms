@@ -2,8 +2,8 @@
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/timepicker.css') }}">
 @endsection
-
 @section('style')
 @endsection
 
