@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AbsensiModels;
+use App\Models\LemburModels;
 use App\Models\PermohonanModels;
 use App\Models\SettingModels;
 use App\Models\User;
@@ -226,10 +227,12 @@ class HomeController extends Controller
             $selisihHari = $tanggalAkhir->diffInDays($tanggalAwal);
         }
 
+        // dd($request->input('start_date'));
+
         $user = PermohonanModels::create([
             'user_id' => Auth::user()->id,
-            'start_date' => $request->input('start_date'),
-            'end_date' => @$request->input('end_date'),
+            'awal_cuti' => $request->input('start_date'),
+            'akhir_cuti' => @$request->input('end_date'),
             'jumlah_cuti' => $selisihHari,
             'type' => $request->input('type_izin'),
             'description' => $request->input('alasan'),
@@ -238,7 +241,61 @@ class HomeController extends Controller
 
         // Lakukan registrasi atau tindakan lainnya jika validasi berhasil
 
-        $request->session()->flash('success', 'Data Permohonan berhasil ditambahkan.');
+        $request->session()->flash('success', 'Data Permohonan Izin berhasil ditambahkan.');
+
+        return redirect('/');
+    }
+
+    public function lembur()
+    {
+        return view('karyawan.absen.lembur');
+    }
+
+    public function storeLembur(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'alasan' => 'required',
+        ]);
+        // dd($validator);
+
+
+        if ($validator->fails()) {
+
+            return redirect('/permohonan_lembur')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+        $selisihHari = 0;
+
+        if ($request->input('end_date')) {
+
+            $tanggalAwal = Carbon::parse($request->input('start_date'));
+            $tanggalAkhir = Carbon::parse($request->input('end_date'));
+
+            $selisihHari = $tanggalAkhir->diffInDays($tanggalAwal);
+        }
+
+        // dd($request->input('start_date'));
+
+        $user = LemburModels::create([
+            'user_id' => Auth::user()->id,
+            'awal_lembur' => $request->input('start_date'),
+            'akhir_lembur' => @$request->input('end_date'),
+            'jumlah_lembur' => $selisihHari,
+            'description' => $request->input('alasan'),
+
+        ]);
+
+
+        // Lakukan registrasi atau tindakan lainnya jika validasi berhasil
+
+        $request->session()->flash('success', 'Data Permohonan Lembur berhasil ditambahkan.');
 
         return redirect('/');
     }

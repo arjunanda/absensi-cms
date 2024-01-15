@@ -66,7 +66,7 @@
                 <tr>
                     <td><strong>Jabatan</strong> </td>
                     <td style="padding-right: 5px; padding-left: 15px;"><strong>:</strong></td>
-                    <td style="text-transform: capitalize;"><?php echo e($user->jabatans->jabatan); ?></td>
+                    <td style="text-transform: uppercase;"><?php echo e($user->jabatans->jabatan); ?></td>
                 </tr>
                 <tr>
                     <td><strong>Periode Kehadiran</strong> </td>

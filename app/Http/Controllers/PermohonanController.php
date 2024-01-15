@@ -27,7 +27,7 @@ class PermohonanController extends Controller
                 'id' => $item->id,
                 'type' => $item->type,
                 'awal_cuti' => $carbonAwalDate->format('d F Y'),
-                'akhir_cuti' => $carbonAkhirDate->format('d F Y'),
+                'akhir_cuti' => @$item->akhir_cuti ? $carbonAkhirDate->format('d F Y') : '-',
                 'description' => $item->description,
                 'status' => $item->status,
                 'name' => optional($item->users)->name,

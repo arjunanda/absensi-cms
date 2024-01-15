@@ -136,6 +136,10 @@
     function Izin() {
         window.location.href = '/permohonan_izin'
     }
+
+    function Lembur() {
+        window.location.href = '/permohonan_lembur'
+    }
 </script>
 <?php $__env->stopSection(); ?>
 

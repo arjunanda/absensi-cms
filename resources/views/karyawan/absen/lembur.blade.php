@@ -14,7 +14,7 @@
             </nav>
             <div class="px-3 py-3">
 
-                    <form novalidate="" method="POST" action="{{ route('store-karyawan') }}" enctype="multipart/form-data">
+                    <form novalidate="" method="POST" action="{{ route('store_lembur') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-3">
@@ -38,24 +38,6 @@
 
 
                                 @error('end_date')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label class="form-label font-dark" id="type">
-                                    Tipe
-                                </label>
-
-                                <select class="form-control @error('type') is-invalid @enderror" id="type"
-                                    name="type">
-
-                                    <option value="0">--Select--</option>
-                                    <option value="1">Sakit</option>
-                                    <option value="2">Cuti</option>
-
-                                </select>
-                                @error('type')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
 

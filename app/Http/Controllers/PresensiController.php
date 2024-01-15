@@ -88,11 +88,74 @@ class PresensiController extends Controller
             return !in_array($dayOfWeek, [6, 7]);
         });
 
-        $cuti = PermohonanModels::where('status', 'approve')->where('status', 'cuti')->count();
-        $sakit = PermohonanModels::where('status', 'approve')->where('status', 'sakit')->count();
+
+        $querySakit = PermohonanModels::where('user_id', $id)->where('status', 'approve')
+            ->where('type', 'sakit')
+            ->where('awal_cuti', '>', $start)
+            ->where('awal_cuti', '<', $end)
+            ->get();
+
+            $selisihHari = 0;
+
+
+        foreach ($querySakit as $key => $value) {
+
+
+            if ($value->akhir_cuti == null) {
+
+                $data = $presensi->filter(function ($item) use ($value) {
+                    // Filter tanggal dalam $presensi yang lebih besar dari tanggal awal cuti
+                    return (new DateTime($item->tanggal_checkin))->format('Y-m-d') > $value->awal_cuti;
+                });
+
+                if ($data->isNotEmpty()) {
+                    $tanggalCheckinPertama = new DateTime($data->first()->tanggal_checkin);
+                    $awalCuti = new DateTime($value->awal_cuti);
+                    $selisihHari = $tanggalCheckinPertama->diff($awalCuti)->days;
+                }
+
+
+            }
+        }
+
+
+        $queryCuti = PermohonanModels::where('user_id', $id)->where('status', 'approve')
+            ->where('type', 'cuti')
+            ->where('awal_cuti', '>', $start)
+            ->where('awal_cuti', '<', $end)
+            ->get();
+
+            $selisihHariCuti = 0;
+
+
+        foreach ($queryCuti as $key => $value) {
+
+
+            if ($value->akhir_cuti == null) {
+
+                $data = $presensi->filter(function ($item) use ($value) {
+                    // Filter tanggal dalam $presensi yang lebih besar dari tanggal awal cuti
+                    return (new DateTime($item->tanggal_checkin))->format('Y-m-d') > $value->awal_cuti;
+                });
+
+                if ($data->isNotEmpty()) {
+                    $tanggalCheckinPertama = new DateTime($data->first()->tanggal_checkin);
+                    $awalCuti = new DateTime($value->awal_cuti);
+                    $selisihHariCuti = $tanggalCheckinPertama->diff($awalCuti)->days;
+                }
+
+
+            }
+        }
+
+        $sakit = PermohonanModels::where('status', 'approve')->where('status', 'sakit')->where('awal_cuti', '>=', $start)
+            ->where('awal_cuti', '<=', $end)->count();
+        $cuti = PermohonanModels::where('status', 'approve')->where('status', 'cuti')->where('awal_cuti', '>=', $start)
+            ->where('awal_cuti', '<=', $end)->count();
         $tidak_masuk = $this->hitungHariTanpaWeekend($start, $end) - count($filteredPresensi);
 
-        // dd(count($filteredPresensi));
+        $sakit = $sakit == 0 ? $selisihHari : $sakit;
+        $cuti = $cuti == 0 ? $selisihHariCuti : $cuti;
 
         $data = [
             'user' => $user,
@@ -101,13 +164,13 @@ class PresensiController extends Controller
             'tanggal_end' => $end,
             'jumlah_sakit' => $sakit,
             'jumlah_cuti' => $cuti,
-            'tidak_masuk' => $tidak_masuk
+            'tidak_masuk' => $tidak_masuk - $cuti - $sakit
         ];
 
-        $pdf = Pdf::loadView('admin.presensi.download', $data);
-        return $pdf->download('laporan.pdf');
+        // $pdf = Pdf::loadView('admin.presensi.download', $data);
+        // return $pdf->download('laporan.pdf');
 
-        // return view('admin.presensi.download', $data);
+        return view('admin.presensi.download', $data);
     }
 
     public function getDataPresensi(Request $request)
@@ -148,7 +211,8 @@ class PresensiController extends Controller
         }
     }
 
-    protected function hitungHariTanpaWeekend($start, $end) {
+    protected function hitungHariTanpaWeekend($start, $end)
+    {
         $jumlahHari = 0;
 
         $tanggalIterasi = new DateTime($start);
