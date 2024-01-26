@@ -62,7 +62,9 @@
                                                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='presensi' || Route::currentRouteName()=='detail-presensi') || Route::currentRouteName()=='create-presensi' ? 'active' : '' }}" href="{{route('presensi')}}"><i data-feather="book"> </i><span>Presensi</span></a></li>
                                                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='settings') ? 'active' : '' }}" href="{{route('settings')}}"><i data-feather="settings"> </i><span>Atur Jam Kerja</span></a></li>
                                             @else
-                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='presensi' || Route::currentRouteName()=='detail-presensi') || Route::currentRouteName()=='create-presensi' ? 'active' : '' }}" href="{{route('presensi')}}"><i data-feather="book"> </i><span>Presensi</span></a></li>
+                                            <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='dashboard' ? 'active' : '' }}" href="{{route('dashboard')}}"><i data-feather="home"> </i><span>{{ trans('lang.Dashboards') }}</span></a></li>
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='presensi.owner' || Route::currentRouteName()=='detail-presensi.owner') ? 'active' : '' }}" href="{{route('presensi.owner')}}"><i data-feather="book"> </i><span>Presensi</span></a></li>
+                                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{(Route::currentRouteName()=='admin' || Route::currentRouteName()=='add-admin' || Route::currentRouteName()=='update-admin') ? 'active' : '' }}" href="{{route('admin')}}"><i data-feather="settings"> </i><span>Admin</span></a></li>
                                                  @endif
 
 

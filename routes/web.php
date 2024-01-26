@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\SettingController;
@@ -164,21 +165,24 @@ Route::group(['middleware' => ['checkRole:admin'], 'prefix' => 'dashboard'], fun
     Route::post('/permohonan/detail/{id}/status', [PermohonanController::class, 'changeStatus'])->name('change_permohonan_status');
 });
 
-// Route::group(['middleware' => ['checkRole:owner'], 'prefix' => 'dashboard'], function () {
-//     Route::get('/', [DashboardController::class, 'show'])->name('dashboard');
+Route::group(['middleware' => ['checkRole:owner'], 'prefix' => 'dashboard'], function () {
+    Route::get('/', [OwnerController::class, 'dashboard'])->name('dashboard');
 
-//     // Presensi
-//     Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi');
-//     Route::get('/get-presensi', [PresensiController::class, 'getDataPresensi'])->name('get-presensi');
-//     Route::get('/presensi/create-laporan', [PresensiController::class, 'createReport'])->name('create-presensi');
-//     Route::post('/presensi/download-laporan', [PresensiController::class, 'storeReport'])->name('store-presensi');
-//     Route::get('/presensi/detail/{id}', [PresensiController::class, 'detail'])->name('detail-presensi');
-//     Route::post('/presensi/edit/{id}', [PresensiController::class, 'update'])->name('update-presensi');
+    // Karyawan
+    Route::view('/karyawan', 'owner.karyawan.index')->name('karyawan.owner');
+    Route::get('/get-karyawan-owner', [KaryawanController::class, 'index'])->name('get-karyawan-owner');
+    Route::get('/get-admin', [OwnerController::class, 'getAdmin']);
 
-//     // Setting
-//     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
-//     Route::get('/edit-profile', [SettingController::class, 'editProfile'])->name('edit_profile');
-//     Route::post('/update-profile', [SettingController::class, 'updateProfile'])->name('update_profile');
-//     Route::post('/update-setting', [SettingController::class, 'update'])->name('update-setting');
+    Route::get('/presensi', [OwnerController::class, 'presensi'])->name('presensi.owner');
+    Route::get('/presensi/detail/{id}', [OwnerController::class, 'detailPresensi'])->name('detail-presensi.owner');
+    Route::get('/get-presensi-owner', [PresensiController::class, 'getDataPresensi'])->name('get-presensi.owner');
 
-// });
+    Route::view('/admin', 'owner.admin.index')->name('admin');
+
+    Route::get('/admin/add', [OwnerController::class, 'create'])->name('add-admin');
+    Route::post('/admin/add', [OwnerController::class, 'store'])->name('store-admin');
+    Route::get('/admin/edit/{id}', [OwnerController::class, 'edit'])->name('edit-admin');
+    Route::post('/admin/edit/{id}', [OwnerController::class, 'update'])->name('update-admin');
+    Route::delete('/admin/delete/{id}', [OwnerController::class, 'destroy'])->name('delete-admin');
+
+});
