@@ -116,10 +116,10 @@
                     searchable: false,
                     orderable: false,
                     render: function(data, type, row) {
-                        return '<div  class="d-flex flex-wrap justify-content-start"><a href="/dashboard/admin/edit/' + row.id +
+                        return '<div  class="d-flex flex-wrap justify-content-start"><a href="/dashboard-owner/admin/edit/' + row.id +
                             '"><button class="btn btn-success " style="margin-top: 2px; margin-right: 5px;">Edit</button></a> ' +
 
-                            '<form action="/dashboard/admin/delete/' + row.id + '" method="POST" class="delete-form" style="margin-top: 2px;">' +
+                            '<form action="/dashboard-owner/admin/delete/' + row.id + '" method="POST" class="delete-form" style="margin-top: 2px;">' +
                     '<?php echo csrf_field(); ?>' +
                     '<?php echo method_field("DELETE"); ?>' +
                     '<button type="button" class="btn btn-danger delete-btn">Delete</button>' +

@@ -18,7 +18,7 @@
       <div class="col-md-8 offset-md-2">
         <p class="sub-content">The page you are attempting to reach is currently not available. This may be because the page does not exist or has been moved.</p>
       </div>
-      <div><a class="btn btn-danger-gradien btn-lg" href="<?php echo e(route('/')); ?>">BACK TO HOME PAGE</a></div>
+      <div><a class="btn btn-danger-gradien btn-lg" href="<?php echo e(route('dashboard')); ?>">BACK TO HOME PAGE</a></div>
     </div>
   </div>
   <!-- error-404 end      -->
@@ -28,4 +28,5 @@
 <?php $__env->startSection('script'); ?>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.errors.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/redtech/development/website/Laravel/cuba_starter_kit/resources/views/errors/404.blade.php ENDPATH**/ ?>

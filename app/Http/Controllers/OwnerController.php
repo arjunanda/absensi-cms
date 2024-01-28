@@ -90,7 +90,7 @@ class OwnerController extends Controller
 
         if ($validator->fails()) {
 
-            return redirect('/dashboard/admin/add')
+            return redirect('/dashboard-owner/admin/add')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -107,7 +107,7 @@ class OwnerController extends Controller
             } catch (\Throwable $th) {
                 $request->session()->flash('error', 'Terjadi kesalahan ketika mengupload gambar.');
 
-                return redirect('/dashboard/admin');
+                return redirect('/dashboard-owner/admin');
             }
         }
 
@@ -126,7 +126,7 @@ class OwnerController extends Controller
 
         $request->session()->flash('success', 'Data admin berhasil ditambahkan.');
 
-        return redirect('/dashboard/admin');
+        return redirect('/dashboard-owner/admin');
     }
 
     /**
@@ -185,7 +185,7 @@ class OwnerController extends Controller
 
         if ($validator->fails()) {
 
-            return redirect('/dashboard/admin/edit/' . $id)
+            return redirect('/dashboard-owner/admin/edit/' . $id)
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -202,7 +202,7 @@ class OwnerController extends Controller
             } catch (\Throwable $th) {
                 $request->session()->flash('error', 'Terjadi kesalahan ketika mengupload gambar.');
 
-                return redirect('/dashboard/admin');
+                return redirect('/dashboard-owner/admin');
             }
         }
 
@@ -223,7 +223,7 @@ class OwnerController extends Controller
             ]);
 
             if ($nipValidator->fails()) {
-                return redirect('/dashboard/admin/edit/' . $id)
+                return redirect('/dashboard-owner/admin/edit/' . $id)
                     ->withErrors($nipValidator)
                     ->withInput();
             }
@@ -240,7 +240,7 @@ class OwnerController extends Controller
             ]);
 
             if ($passwordValidator->fails()) {
-                return redirect('/dashboard/admin/edit/' . $id)
+                return redirect('/dashboard-owner/admin/edit/' . $id)
                     ->withErrors($passwordValidator)
                     ->withInput();
             }
@@ -254,7 +254,7 @@ class OwnerController extends Controller
 
         $request->session()->flash('success', 'Data admin berhasil diperbaharui.');
 
-        return redirect('/dashboard/admin');
+        return redirect('/dashboard-owner/admin');
     }
 
     /**
