@@ -9,7 +9,8 @@ class AuthController extends Controller
 {
     //
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $request->validate([
             'nip'    => 'required',
             'password' => 'required',
@@ -17,9 +18,18 @@ class AuthController extends Controller
 
         $credentials = $request->only('nip', 'password');
 
+        // dd(Auth::attempt($credentials));
+
 
         if (Auth::attempt($credentials)) {
             // Login berhasil
+            // dd(Auth::user()->role);
+
+            if (Auth::user()->role_id == 3) {
+
+                return redirect()->intended('/dashboard-owner'); // Ganti dengan rute yang sesuai
+            }
+
             return redirect()->intended('/dashboard'); // Ganti dengan rute yang sesuai
         }
 
@@ -28,7 +38,8 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login_karyawan(Request $request) {
+    public function login_karyawan(Request $request)
+    {
         // dd($request->all());
         $request->validate([
             'nip'    => 'required',
@@ -48,5 +59,11 @@ class AuthController extends Controller
         return back()->withErrors([
             'login' => 'These credentials do not match our records.',
         ]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/auth'); // Ganti dengan URL tujuan setelah logout
     }
 }
