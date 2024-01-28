@@ -9,6 +9,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="<?php echo e(asset('assets/images/favicon.png')); ?>" type="image/x-icon">
     <link rel="shortcut icon" href="<?php echo e(asset('assets/images/favicon.png')); ?>" type="image/x-icon">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>"> <!-- Tambahkan ini -->
     <title>Cuba - Premium Admin Template</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
@@ -17,7 +18,7 @@
     <?php echo $__env->yieldContent('style'); ?>
   </head>
   <body <?php if(Route::current()->getName() == 'index'): ?> onload="startTime()" <?php endif; ?>>
-    <?php if(Route::current()->getName() == 'index'): ?> 
+    <?php if(Route::current()->getName() == 'index'): ?>
       <div class="loader-wrapper">
         <div class="loader-index"><span></span></div>
         <svg>
@@ -43,7 +44,7 @@
         <?php echo $__env->make('layouts.simple.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- Page Sidebar Ends-->
         <div class="page-body">
-          <div class="container-fluid">        
+          <div class="container-fluid">
             <div class="page-title">
               <div class="row">
                 <div class="col-6">
@@ -51,7 +52,7 @@
                 </div>
                 <div class="col-6">
                   <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?php echo e(route('/')); ?>"> <i data-feather="home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>"> <i data-feather="home"></i></a></li>
                     <?php echo $__env->yieldContent('breadcrumb-items'); ?>
                   </ol>
                 </div>
@@ -63,12 +64,12 @@
           <!-- Container-fluid Ends-->
         </div>
         <!-- footer start-->
-        <?php echo $__env->make('layouts.simple.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> 
-        
+        <?php echo $__env->make('layouts.simple.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
       </div>
     </div>
     <!-- latest jquery-->
-    <?php echo $__env->make('layouts.simple.script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>  
+    <?php echo $__env->make('layouts.simple.script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Plugin used-->
 
     <script type="text/javascript">
@@ -78,4 +79,5 @@
       }
     </script>
   </body>
-</html><?php /**PATH C:\Users\fajar\Documents\absensi-cms\resources\views/layouts/simple/master.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\Users\fajar\Documents\absensi-cms\resources\views/layouts/simple/master.blade.php ENDPATH**/ ?>
