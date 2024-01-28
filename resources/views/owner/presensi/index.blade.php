@@ -92,7 +92,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ url('/dashboard/get-presensi-owner') }}',
+                    url: '{{ url('/dashboard-owner/get-presensi-owner') }}',
                     type: 'GET',
                 },
                 columns: [{

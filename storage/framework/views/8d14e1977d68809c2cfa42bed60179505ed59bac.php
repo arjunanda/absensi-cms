@@ -97,7 +97,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '<?php echo e(url('/dashboard/get-admin')); ?>'
+                    url: '<?php echo e(url('/dashboard-owner/get-admin')); ?>'
 
                         ,
                     type: 'GET',

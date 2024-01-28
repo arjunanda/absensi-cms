@@ -115,7 +115,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ url('/dashboard/get-admin') }}'
+                    url: '{{ url('/dashboard-owner/get-admin') }}'
 
                         ,
                     type: 'GET',

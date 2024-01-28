@@ -105,7 +105,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ url('/dashboard/get-karyawan-owner') }}'
+                    url: '{{ url('/dashboard-owner/get-karyawan-owner') }}'
 
                         ,
                     type: 'GET',
