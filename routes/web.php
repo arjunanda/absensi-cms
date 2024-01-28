@@ -165,8 +165,8 @@ Route::group(['middleware' => ['checkRole:admin'], 'prefix' => 'dashboard'], fun
     Route::post('/permohonan/detail/{id}/status', [PermohonanController::class, 'changeStatus'])->name('change_permohonan_status');
 });
 
-Route::group(['middleware' => ['checkRole:owner'], 'prefix' => 'dashboard'], function () {
-    Route::get('/', [OwnerController::class, 'dashboard'])->name('dashboard');
+Route::group(['middleware' => ['checkRole:owner'], 'prefix' => 'dashboard-owner'], function () {
+    Route::get('/', [OwnerController::class, 'dashboard'])->name('dashboard.owner');
 
     // Karyawan
     Route::view('/karyawan', 'owner.karyawan.index')->name('karyawan.owner');
@@ -186,3 +186,6 @@ Route::group(['middleware' => ['checkRole:owner'], 'prefix' => 'dashboard'], fun
     Route::delete('/admin/delete/{id}', [OwnerController::class, 'destroy'])->name('delete-admin');
 
 });
+
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
