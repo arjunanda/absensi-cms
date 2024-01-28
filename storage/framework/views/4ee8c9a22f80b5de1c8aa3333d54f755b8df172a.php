@@ -10,12 +10,12 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-title'); ?>
-    <h3>Jabatan Lists</h3>
+    <h3>Karyawan Lists</h3>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-items'); ?>
     <li class="breadcrumb-item">Dashboard</li>
-    <li class="breadcrumb-item active">Jabatan</li>
+    <li class="breadcrumb-item active">Karyawan</li>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -30,8 +30,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-0 me-0"></div>
-                            <a class="btn btn-primary" href="<?php echo e(route('add-jabatan')); ?>"> <i data-feather="plus-square">
-                                </i>Tambah Jabatan</a>
+                            <a class="btn btn-primary" href="<?php echo e(route('add-admin')); ?>"> <i data-feather="plus-square">
+                                </i>Tambah Admin</a>
                         </div>
                     </div>
                 </div>
@@ -44,8 +44,18 @@
                             <?php if(session('success')): ?>
                                 <div class="alert alert-success dark alert-dismissible fade show" role="alert">
                                     <center>
-
                                         <strong class="text-center"><?php echo e(session('success')); ?></strong>
+                                    </center>
+                                    <button class="btn-close" type="button" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if(session('error')): ?>
+                                <div class="alert alert-danger dark alert-dismissible fade show" role="alert">
+                                    <center>
+
+                                        <strong class="text-center"><?php echo e(session('error')); ?></strong>
 
 
 
@@ -59,12 +69,12 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table id="jabatan-table" class="display datatables">
+                            <table id="users-table" class="display datatables">
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
-                                        <th scope="col">Jabatan</th>
-                                        <th scope="col">Jumlah Karyawan</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Nip</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -84,37 +94,33 @@
 
     <script>
         $(document).ready(function() {
-            $('#jabatan-table').DataTable({
+            $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '<?php echo e(url('/dashboard/get-jabatan')); ?>',
-                    data: function(d) {
-                        d.draw = d.start / d.length + 1;
+                    url: '<?php echo e(url('/dashboard/get-admin')); ?>'
 
-                    },
+                        ,
                     type: 'GET',
                 },
                 columns: [{
                     data: 'no',
                     name: 'no'
                 }, {
-                    data: 'jabatan',
-                    name: 'jabatan'
+                    data: 'name',
+                    name: 'name'
                 }, {
-                    data: 'jumlah_karyawan',
-                    name: 'jumlah_karyawan'
-
-
+                    data: 'nip',
+                    name: 'nip'
                 }, {
                     data: null,
                     searchable: false,
                     orderable: false,
                     render: function(data, type, row) {
-                        return '<div  class="d-flex flex-wrap justify-content-start"><a href="/dashboard/jabatan/edit/' + row.id +
+                        return '<div  class="d-flex flex-wrap justify-content-start"><a href="/dashboard/admin/edit/' + row.id +
                             '"><button class="btn btn-success " style="margin-top: 2px; margin-right: 5px;">Edit</button></a> ' +
 
-                            '<form action="/dashboard/jabatan/delete/' + row.id + '" method="POST" class="delete-form" style="margin-top: 2px;">' +
+                            '<form action="/dashboard/admin/delete/' + row.id + '" method="POST" class="delete-form" style="margin-top: 2px;">' +
                     '<?php echo csrf_field(); ?>' +
                     '<?php echo method_field("DELETE"); ?>' +
                     '<button type="button" class="btn btn-danger delete-btn">Delete</button>' +
@@ -126,11 +132,11 @@
                 }, ],
             });
 
-            $('#jabatan-table').on('click', '.delete-btn', function() {
+            $('#users-table').on('click', '.delete-btn', function() {
                 var form = $(this).closest('form');
 
                 // Konfirmasi penghapusan (gunakan sweetalert atau konfirmasi sesuai kebutuhan)
-                if (confirm('Apakah kamu yakin ingin menghapus jabatan ini?')) {
+                if (confirm('Apakah kamu yakin menghapus karyawan ini?')) {
                     // Kirim formulir penghapusan
                     form.submit();
                 }
@@ -143,4 +149,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.simple.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\fajar\Documents\absensi-cms\resources\views/admin/jabatan/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.simple.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\fajar\Documents\absensi-cms\resources\views/owner/admin/index.blade.php ENDPATH**/ ?>

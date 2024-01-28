@@ -205,6 +205,9 @@ unset($__errorArgs, $__bag); ?>
                                                                </div>
 
                                                       </div>
+                                                      <a href="<?php echo e(route('karyawan')); ?>"><button class="btn btn-secondary" type="button">Cancel</button></a>
+
+
                                                       <button class="btn btn-primary" type="submit">Update</button>
                                              </form>
                                     </div>

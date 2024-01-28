@@ -10,32 +10,17 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-title'); ?>
-    <h3>Jabatan Lists</h3>
+    <h3>Presensi Lists</h3>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-items'); ?>
     <li class="breadcrumb-item">Dashboard</li>
-    <li class="breadcrumb-item active">Jabatan</li>
+    <li class="breadcrumb-item active">presensi</li>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
     <div class="container-fluid">
         <div class="row">
-
-            <div class="col-md-12 project-list">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-6">
-
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-0 me-0"></div>
-                            <a class="btn btn-primary" href="<?php echo e(route('add-jabatan')); ?>"> <i data-feather="plus-square">
-                                </i>Tambah Jabatan</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="col-sm-12">
                 <div class="card">
@@ -59,12 +44,14 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table id="jabatan-table" class="display datatables">
+                            <table id="presensi-table" class="display datatables">
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
-                                        <th scope="col">Jabatan</th>
-                                        <th scope="col">Jumlah Karyawan</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Tanggal Check In</th>
+                                        <th scope="col">Check in</th>
+                                        <th scope="col">Check out</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -84,56 +71,41 @@
 
     <script>
         $(document).ready(function() {
-            $('#jabatan-table').DataTable({
+            $('#presensi-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '<?php echo e(url('/dashboard/get-jabatan')); ?>',
-                    data: function(d) {
-                        d.draw = d.start / d.length + 1;
-
-                    },
+                    url: '<?php echo e(url('/dashboard/get-presensi-owner')); ?>',
                     type: 'GET',
                 },
                 columns: [{
                     data: 'no',
                     name: 'no'
                 }, {
-                    data: 'jabatan',
-                    name: 'jabatan'
+                    data: 'name',
+                    name: 'name'
                 }, {
-                    data: 'jumlah_karyawan',
-                    name: 'jumlah_karyawan'
+                    data: 'tanggal_checkin',
+                    name: 'tanggal_checkin'
+                }, {
+                    data: 'check_in',
+                    name: 'check_in'
 
-
+                }, {
+                    data: 'check_out',
+                    name: 'check_out'
                 }, {
                     data: null,
                     searchable: false,
                     orderable: false,
                     render: function(data, type, row) {
-                        return '<div  class="d-flex flex-wrap justify-content-start"><a href="/dashboard/jabatan/edit/' + row.id +
-                            '"><button class="btn btn-success " style="margin-top: 2px; margin-right: 5px;">Edit</button></a> ' +
-
-                            '<form action="/dashboard/jabatan/delete/' + row.id + '" method="POST" class="delete-form" style="margin-top: 2px;">' +
-                    '<?php echo csrf_field(); ?>' +
-                    '<?php echo method_field("DELETE"); ?>' +
-                    '<button type="button" class="btn btn-danger delete-btn">Delete</button>' +
-                    '</form> </div>';
+                        return '<a href="/dashboard/presensi/detail/' + row.id +
+                            '"><button class="btn btn-success">Detail</button></a> ';
 
                     },
                     width: '150px'
 
                 }, ],
-            });
-
-            $('#jabatan-table').on('click', '.delete-btn', function() {
-                var form = $(this).closest('form');
-
-                // Konfirmasi penghapusan (gunakan sweetalert atau konfirmasi sesuai kebutuhan)
-                if (confirm('Apakah kamu yakin ingin menghapus jabatan ini?')) {
-                    // Kirim formulir penghapusan
-                    form.submit();
-                }
             });
             setTimeout(() => {
                 $('.btn-close').click();
@@ -143,4 +115,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.simple.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\fajar\Documents\absensi-cms\resources\views/admin/jabatan/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.simple.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\fajar\Documents\absensi-cms\resources\views/owner/presensi/index.blade.php ENDPATH**/ ?>
